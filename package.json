@@ -1,0 +1,51 @@
+{
+  "name": "react-use-components",
+  "version": "5.14.0",
+  "description": "Collection of hook-like components without React Hooks",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "types": "lib/index.d.ts",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "start": "yarn storybook",
+    "test": "echo hmm...",
+    "build": "tsc",
+    "clean": "rimraf lib storybook-static",
+    "storybook": "start-storybook -p 6008",
+    "storybook:build": "build-storybook",
+    "storybook:upload": "gh-pages -d storybook-static",
+    "storybook:clean": "rimraf storybook-static",
+    "release": "semantic-release"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yeojz/react-use-components"
+  },
+  "bugs": {
+    "url": "https://github.com/yeojz/react-use-components/issues"
+  },
+  "homepage": "https://github.com/yeojz/react-use-components#readme",
+  "dependencies": {
+    "lodash.isequal": "^4.5.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.0.5",
+    "@storybook/addon-knobs": "^5.0.5",
+    "@storybook/addon-notes": "^5.0.5",
+    "@storybook/addon-options": "^5.0.5",
+    "@storybook/react": "^5.0.5",
+    "@types/lodash.isequal": "^4.5.5",
+    "@types/react": "^16.8.8",
+    "@types/storybook__react": "^4.0.1",
+    "fork-ts-checker-webpack-plugin": "^1.0.0",
+    "markdown-loader": "^5.0.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.3.4000"
+  }
+}
