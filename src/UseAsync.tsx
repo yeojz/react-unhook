@@ -1,56 +1,32 @@
-import { Component } from 'react';
-import {
-  ArrayComparator,
-  shallowEqualArrays,
-  shouldUpdate,
-  AnyFunction
-} from './utils';
+import * as React from 'react';
+import UseCallback from './UseCallback';
+import { CommonProps, SetState } from './utils';
 
-type Props = {
-  fn: AnyFunction;
-  inputs: Array<any>;
-  isEqual: ArrayComparator;
-  sync: AnyFunction;
+type Props = CommonProps & {
+  updater: SetState;
 };
 
-export type UseAsyncState = {
-  loading: boolean;
-  value: any;
-};
-
-export default class UseAsync extends Component<Props> {
-  static defaultProps = {
-    inputs: [],
-    isEqual: shallowEqualArrays
+export default class UseAsync extends React.Component<Props> {
+  callback = () => {
+    this.props.updater({ loading: true }, this.fetch);
   };
 
-  static async runner(props) {
-    const { sync } = props;
+  fetch = async () => {
+    const value = await this.props.fn();
 
-    const fn = async () => {
-      const value = await props.fn();
-      sync({
-        loading: false,
-        value
-      });
-    };
-
-    sync({ loading: true }, fn);
-  }
-
-  componentDidMount() {
-    UseAsync.runner(this.props);
-  }
-
-  shouldComponentUpdate(nextProps: Props) {
-    return shouldUpdate(this.props.inputs, nextProps.inputs, nextProps.isEqual);
-  }
-
-  componentDidUpdate() {
-    UseAsync.runner(this.props);
-  }
+    this.props.updater({
+      loading: false,
+      value
+    });
+  };
 
   render() {
-    return null;
+    return (
+      <UseCallback
+        fn={this.callback}
+        deps={this.props.deps}
+        comparator={this.props.comparator}
+      />
+    );
   }
 }

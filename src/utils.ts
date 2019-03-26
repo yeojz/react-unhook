@@ -1,14 +1,26 @@
-export interface AnyFunction {
+export interface AnyFn {
   (...args: any[]): void;
 }
 
-export interface ArrayComparator {
-  (a: Array<any>, b: Array<any>): boolean;
+export interface EqualityFn {
+  (currentInputs: any[], nextInputs: any[]): boolean;
 }
 
+/**
+ * Interface for setState
+ */
 export interface SetState {
-  (value: any, callback?: () => void);
+  (value: unknown, callback?: () => void);
 }
+
+/**
+ * Common Props for "Use*" components
+ */
+export type CommonProps = {
+  fn: AnyFn;
+  deps?: any[];
+  comparator?: EqualityFn;
+};
 
 /**
  * Shallow compares 2 arrays using strict equals.
@@ -18,9 +30,9 @@ export interface SetState {
  *
  * @returns boolean
  */
-export const shallowEqualArrays: ArrayComparator = (
-  a: Array<any>,
-  b: Array<any>
+export const shallowEqualArrays: EqualityFn = (
+  a: any[],
+  b: any[]
 ): boolean => {
   if (a === b) {
     return true;
@@ -31,26 +43,4 @@ export const shallowEqualArrays: ArrayComparator = (
   }
 
   return a.every((value, idx) => value === b[idx]);
-};
-
-/**
- * Compares current inputs and next inputs and determine if
- * component should update.
- *
- * @param currentInputs
- * @param nextInputs
- * @param isEqual
- *
- * @returns boolean
- */
-export const shouldUpdate = (
-  currentInputs: Array<any>,
-  nextInputs: Array<any>,
-  isEqual: ArrayComparator
-): boolean => {
-  if (currentInputs.length < 1) {
-    return false;
-  }
-
-  return isEqual(currentInputs, nextInputs);
 };
