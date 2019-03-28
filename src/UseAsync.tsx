@@ -2,7 +2,7 @@ import * as React from 'react';
 import UseCallback from './UseCallback';
 import { CommonProps, SetState } from './utils';
 
-type Props = CommonProps & {
+interface Props extends CommonProps {
   updater: SetState;
 };
 

@@ -10,17 +10,21 @@ export interface EqualityFn {
  * Interface for setState
  */
 export interface SetState {
-  (value: unknown, callback?: () => void);
+  (value: unknown, callback?: () => void): void;
 }
 
 /**
  * Common Props for "Use*" components
  */
-export type CommonProps = {
+export interface CommonProps {
   fn: AnyFn;
   deps?: any[];
   comparator?: EqualityFn;
-};
+}
+
+export interface Noop {
+  (): void;
+}
 
 /**
  * Shallow compares 2 arrays using strict equals.
@@ -30,10 +34,7 @@ export type CommonProps = {
  *
  * @returns boolean
  */
-export const shallowEqualArrays: EqualityFn = (
-  a: any[],
-  b: any[]
-): boolean => {
+export const shallowEqualArrays: EqualityFn = (a: any[], b: any[]): boolean => {
   if (a === b) {
     return true;
   }
