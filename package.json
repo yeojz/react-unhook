@@ -1,7 +1,7 @@
 {
-  "name": "react-use-components",
-  "version": "5.14.0",
-  "description": "Collection of hook-like components without React Hooks",
+  "name": "react-unhook",
+  "version": "0.0.0",
+  "description": "React hooks without hooks. Collection of hook-like components.",
   "main": "lib/index.js",
   "files": [
     "lib/"
@@ -22,12 +22,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yeojz/react-use-components"
+    "url": "https://github.com/yeojz/react-unhook"
   },
   "bugs": {
-    "url": "https://github.com/yeojz/react-use-components/issues"
+    "url": "https://github.com/yeojz/react-unhook/issues"
   },
-  "homepage": "https://github.com/yeojz/react-use-components#readme",
+  "homepage": "https://github.com/yeojz/react-unhook#readme",
   "dependencies": {},
   "devDependencies": {
     "@storybook/addon-actions": "^5.0.5",

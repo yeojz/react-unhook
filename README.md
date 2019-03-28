@@ -1,19 +1,23 @@
-# react-use-components
+# react-unhook
 
-> Collection of hook-like components without React Hooks
+> React hooks without hooks. Collection of hook-like components.
 
-- [**Core**](./docs/Core.md)
-
-  - [`UseEffect`](./docs/UseEffect.md) - accepts a function which is called when source changes
+- [`UseCallback`](./docs/UseCallback.md)
+- [`UseEffect`](./docs/UseEffect.md)
+- [`UseAsync`](./docs/UseCallback.md)
 
 ## Usage
 
 ```bash
-npm install react-use-components --save
+npm install react-unhook --save
 ```
 
-You can import each hook individually `import useToggle from 'react-use/lib/useToggle'`.
+```js
+import UseCallback from 'react-unhook/lib/UseCallback';
+// or
+import { UseCallback } from 'react-unhook';
+```
 
 ## License
 
-`react-use-component` is [MIT licensed](./LICENSE)
+`react-unhook` is [MIT licensed](./LICENSE)
