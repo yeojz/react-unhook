@@ -1,19 +1,18 @@
-import { configure } from '@storybook/react';
-import { setOptions } from '@storybook/addon-options';
+import { configure, addParameters } from '@storybook/react';
+import './styles.css';
 
-setOptions({
-  sortStoriesByKind: false,
-  showStoriesPanel: true,
-  showAddonPanel: true,
-  showSearchBox: false,
-  addonPanelInRight: true,
-  hierarchySeparator: /\//,
-  hierarchyRootSeparator: /\|/,
-  sidebarAnimations: false
+addParameters({
+  options: {
+    hierarchyRootSeparator: /\|/,
+    hierarchySeparator: /\//,
+    panelPosition: 'bottom',
+    sidebarAnimations: false,
+    sortStoriesByKind: false
+  }
 });
 
 const req = require.context(
-  '../src/',
+  '../stories/',
   true,
   /.*\.(stories|story)\.(js|jsx|ts|tsx)?$/
 );

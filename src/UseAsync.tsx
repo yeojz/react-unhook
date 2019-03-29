@@ -4,7 +4,7 @@ import { CommonProps, SetState } from './utils';
 
 interface Props extends CommonProps {
   updater: SetState;
-};
+}
 
 export default class UseAsync extends React.Component<Props> {
   callback = () => {
@@ -24,7 +24,7 @@ export default class UseAsync extends React.Component<Props> {
     return (
       <UseCallback
         fn={this.callback}
-        deps={this.props.deps}
+        inputs={this.props.inputs}
         comparator={this.props.comparator}
       />
     );

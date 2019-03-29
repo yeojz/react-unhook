@@ -12,6 +12,10 @@ module.exports = {
         loader: 'markdown-loader'
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         include: [SRC_PATH],

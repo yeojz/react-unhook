@@ -1,16 +1,20 @@
+import * as warning from 'warning';
+
+const IS_DEV = process.env.NODE_ENV === 'development';
+
 export interface AnyFn {
   (...args: Array<any>): void;
 }
 
-export interface EqualityFn {
-  (currentInputs: Array<any>, nextInputs: Array<any>): boolean;
+export interface InputsComparator {
+  (nextDeps: Array<any>, prevDeps: Array<any> | null): boolean;
 }
 
 /**
  * Interface for setState
  */
 export interface SetState {
-  (value: unknown, callback?: () => void): void;
+  (value: Object | Function, callback?: Function): void;
 }
 
 /**
@@ -18,8 +22,8 @@ export interface SetState {
  */
 export interface CommonProps {
   fn: AnyFn;
-  deps?: Array<any>;
-  comparator?: EqualityFn;
+  inputs?: Array<any>;
+  comparator?: InputsComparator;
 }
 
 export interface Noop {
@@ -27,26 +31,14 @@ export interface Noop {
 }
 
 /**
- * Shallow compares 2 arrays using strict equals.
+ * Object.is
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
  *
- * @param a
- * @param b
- *
+ * @param x
+ * @param y
  * @returns boolean
  */
-export const shallowEqualArrays: EqualityFn = (a: Array<any>, b: Array<any>): boolean => {
-  if (a === b) {
-    return true;
-  }
-
-  if (a.length !== b.length) {
-    return false;
-  }
-
-  return a.every((value, idx) => value === b[idx]);
-};
-
-export function objectIsPonyfill(x: any, y: any) => {
+export const objectIs = (x: any, y: any): boolean => {
   if (x === y) {
     return x !== 0 || 1 / x === 1 / y;
   }
@@ -54,17 +46,48 @@ export function objectIsPonyfill(x: any, y: any) => {
   return x !== x && y !== y;
 };
 
-export const objectIs = typeof Object.is === 'function' 
-  ? Object.is
-  : ObjectIsPonyFill
-
-function areHookInputsEqual(
+/**
+ * Compares 2 arrays using Object.is comparison on their values
+ * Adapted from react-dom/src/server/ReactPartialRendererHooks.js
+ *
+ * @param nextDeps
+ * @param prevDeps
+ *
+ * @returns boolean
+ */
+export function areHookInputsEqual(
   nextDeps: Array<any>,
-  prevDeps: Array<any> | null,
+  prevDeps: Array<any> | null
 ) {
-   if (nextDeps.length !== prevDeps.length) {
+  if (prevDeps === null) {
+    if (IS_DEV) {
+      warning(
+        false,
+        '%s received an "inputs" props during this render, but ' +
+          'not during the previous render. Even though "inputs" prop is optional, ' +
+          'its type cannot change between renders.',
+        'A react-unhook component'
+      );
+    }
     return false;
   }
-    
-  return nextDeps.every((value, idx) => objectIs(value, prevDeps[idx]))
+
+  if (IS_DEV) {
+    // Don't bother comparing lengths in prod because these arrays should be
+    // passed inline.
+    if (nextDeps.length !== prevDeps.length) {
+      warning(
+        false,
+        'The "inputs" props passed to %s changed size between renders. The ' +
+          'order and size of this array must remain constant.\n\n' +
+          'Previous: %s\n' +
+          'Incoming: %s',
+        'a react-unhook component',
+        `[${nextDeps.join(', ')}]`,
+        `[${prevDeps.join(', ')}]`
+      );
+    }
+  }
+
+  return nextDeps.every((value, idx) => objectIs(value, prevDeps[idx]));
 }

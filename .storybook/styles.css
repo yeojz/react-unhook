@@ -1,0 +1,43 @@
+table,
+td,
+tr,
+th {
+  border: 1px #ddd solid;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+table {
+  width: calc(100% - 2em);
+}
+
+td,
+tr,
+th {
+  padding: 1em;
+}
+
+th {
+  width: 100px;
+}
+
+.demo {
+  padding: 1em;
+}
+
+button {
+  background: #fff;
+  border-radius: 3px;
+  border: 1px #000 solid;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  padding: 1em 2em;
+  text-align: center;
+  text-decoration: none;
+}
+
+button:hover {
+  transform: scale(0.9);
+}

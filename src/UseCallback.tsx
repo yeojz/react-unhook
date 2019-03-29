@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps, shallowEqualArrays } from './utils';
+import { CommonProps, areHookInputsEqual } from './utils';
 
 type Props = CommonProps;
 
@@ -9,14 +9,13 @@ export default class UseCallback extends React.Component<Props> {
   }
 
   shouldComponentUpdate(nextProps: Props) {
-    const { deps = [] } = this.props;
+    const { inputs: prevDeps = null } = this.props;
+    const {
+      comparator = areHookInputsEqual,
+      inputs: nextDeps = null
+    } = nextProps;
 
-    if (deps.length < 1) {
-      return false;
-    }
-
-    const { comparator = shallowEqualArrays, deps: nextDeps = [] } = nextProps;
-    return !comparator(deps, nextDeps);
+    return nextDeps === null ? true : !comparator(nextDeps, prevDeps);
   }
 
   componentDidUpdate() {

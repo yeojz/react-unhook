@@ -3,32 +3,28 @@ import UseCallback from './UseCallback';
 import { CommonProps, Noop } from './utils';
 
 interface Props extends CommonProps {
-  fn: () => Noop;
+  fn: () => Noop | void;
 }
 
-type State = {
-  unsub: Noop;
-};
+const noop = () => void 0;
 
-export default class UseEffect extends React.Component<Props, State> {
-  state = {
-    unsub: () => void 0
-  };
+export default class UseEffect extends React.Component<Props> {
+  unsub: Noop = noop;
 
   componentWillUnmount() {
-    this.state.unsub();
+    this.unsub();
   }
 
   callback = () => {
-    this.state.unsub();
-    this.setState({ unsub: this.props.fn() });
+    this.unsub();
+    this.unsub = this.props.fn() || noop;
   };
 
   render() {
     return (
       <UseCallback
         fn={this.callback}
-        deps={this.props.deps}
+        inputs={this.props.inputs}
         comparator={this.props.comparator}
       />
     );
