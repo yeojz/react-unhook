@@ -1,44 +1,88 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
-import DemoComponent from './DemoComponent';
+import { action } from '@storybook/addon-actions';
+import withState from './withState';
 import UseEffect from '../src/UseEffect';
 
-const fn = storiesOf('UseEffect', module).add('Demo', () => {
-  return (
-    <DemoComponent
-      options={{
-        disableOneBtn: true,
-        disableTwo: true
-      }}
-      component={props => (
-        <div>
-          <pre>
-            {`
-function callback() {
-  const interval = setInterval(() => props.increment('counterOne'), 1000);
+function Example(props) {
+  const { count, setCount } = props;
 
-  return () => {
-    clearInterval(interval);
-  }
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+
+      <UseEffect
+        fn={() => {
+          action('EffectsWithoutCleanup')(`You clicked ${count} times`);
+        }}
+      />
+    </div>
+  );
 }
 
-<UseEffect fn={callback} />
-`}
-          </pre>
-          <UseEffect
-            fn={() => {
-              const interval = setInterval(
-                () => props.increment('counterOne'),
-                1000
-              );
+const EffectsWithoutCleanupDemo = withState('count', 'setCount', 0)(Example);
 
-              return () => {
-                clearInterval(interval);
-              };
-            }}
-          />
-        </div>
-      )}
-    />
+const ChatAPI = {
+  subscribeToFriendStatus: (id, handleStatusChange) => {
+    action('EffectsWithCleanup')(`Subscribed ${id}`);
+    handleStatusChange({ isOnline: true });
+  },
+  unsubscribeFromFriendStatus: (id, handleStatusChange) => {
+    action('EffectsWithCleanup')(`Unsubscribed ${id}`);
+    handleStatusChange({ isOnline: false });
+  }
+};
+
+function FriendStatus(props) {
+  const { isOnline, setIsOnline } = props;
+  return (
+    <Fragment>
+      {isOnline === null ? 'Loading' : isOnline ? 'Online' : 'Offline'}
+
+      <UseEffect
+        fn={() => {
+          function handleStatusChange(status) {
+            setIsOnline(status.isOnline);
+          }
+
+          ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+          // Specify how to clean up after this effect:
+          return function cleanup() {
+            ChatAPI.unsubscribeFromFriendStatus(
+              props.friend.id,
+              handleStatusChange
+            );
+          };
+        }}
+        inputs={[props.friend.id]}
+      />
+    </Fragment>
   );
-});
+}
+
+const EffectsWithCleanup = withState('isOnline', 'setIsOnline', null)(
+  FriendStatus
+);
+
+const EffectsWithCleanupDemo = withState('friendID', 'setFriendID', 1)(
+  props => {
+    return (
+      <Fragment>
+        <EffectsWithCleanup friend={{ id: props.friendID }} />
+
+        <label>Friend ID</label>
+        <br />
+        <input
+          value={props.friendID}
+          onChange={evt => props.setFriendID(evt.target.value)}
+          type="number"
+        />
+      </Fragment>
+    );
+  }
+);
+
+storiesOf('UseEffect', module)
+  .add('Effects Without Cleanup', () => <EffectsWithoutCleanupDemo />)
+  .add('Effects With Cleanup', () => <EffectsWithCleanupDemo />);

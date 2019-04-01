@@ -15,7 +15,11 @@ export default class UseCallback extends React.Component<Props> {
       inputs: nextDeps = null
     } = nextProps;
 
-    return nextDeps === null ? true : !comparator(nextDeps, prevDeps);
+    if (nextDeps === null) {
+      return true;
+    }
+
+    return !comparator(nextDeps, prevDeps);
   }
 
   componentDidUpdate() {

@@ -1,5 +1,4 @@
 import { configure, addParameters } from '@storybook/react';
-import './styles.css';
 
 addParameters({
   options: {
@@ -18,6 +17,7 @@ const req = require.context(
 );
 
 const loadStories = () => {
+  console.log(req);
   req.keys().forEach(filename => req(filename));
 };
 

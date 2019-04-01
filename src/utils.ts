@@ -1,6 +1,8 @@
-import * as warning from 'warning';
+import warning from 'warning';
 
 const IS_DEV = process.env.NODE_ENV === 'development';
+
+export const noop = () => void 0;
 
 export interface AnyFn {
   (...args: Array<any>): void;
