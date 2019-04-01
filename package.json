@@ -1,6 +1,6 @@
 {
   "name": "react-unhook",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "React hooks without hooks. Collection of hook-like components.",
   "main": "lib/index.js",
   "files": [
