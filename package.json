@@ -10,14 +10,13 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "yarn storybook",
-    "test": "echo hmm...",
+    "test": "echo using storybook...",
     "build": "tsc",
     "clean": "rimraf lib storybook-static",
     "storybook": "start-storybook -p 6008",
     "storybook:build": "build-storybook",
     "storybook:upload": "gh-pages -d storybook-static",
-    "storybook:clean": "rimraf storybook-static",
-    "release": "semantic-release"
+    "storybook:clean": "rimraf storybook-static"
   },
   "license": "MIT",
   "repository": {
@@ -33,16 +32,13 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.0.5",
-    "@storybook/addon-notes": "^5.0.5",
+    "@storybook/addon-storysource": "^5.0.6",
     "@storybook/react": "^5.0.5",
     "@types/react": "^16.8.8",
     "@types/warning": "^3.0.0",
-    "css-loader": "^2.1.1",
     "fork-ts-checker-webpack-plugin": "^1.0.0",
-    "markdown-loader": "^5.0.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.0.3",
     "typescript": "^3.3.4000"

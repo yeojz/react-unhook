@@ -51,9 +51,11 @@ import { UseCallback, UseEffect } from 'react-unhook';
 These examples are adopted from React's official docs on hooks.
 i.e. [https://reactjs.org/docs/hooks-effect.html](https://reactjs.org/docs/hooks-effect.html)
 
-The unhook examples makes use of `withState` from `recompose` to keep
+The unhook examples makes use of `withState` HOC to keep
 the code style closer to the `hooks` examples. You can easily manage your state
 using a normal class.
+
+These examples are also available at [http://yeojz.github.io/react-unhook](http://yeojz.github.io/react-unhook)
 
 ### Effects Without Cleanup
 
@@ -165,7 +167,7 @@ const Component = withState('isOnline', 'setIsOnline', null)(FriendStatus);
 
 ```jsx
 <UseCallback fn={FUNCTION} />
-<UseCallback fn={FUNCTION} inputs={[]} /> // Conditionally firing an effect via inputs
+<UseCallback fn={FUNCTION} inputs={[]} /> // Conditionally firing an callback
 ```
 
 ### UseEffect
@@ -175,7 +177,7 @@ passed into `UseEffect` may return a "clean-up" function which will be executed 
 
 ```jsx
 <UseEffect fn={FUNCTION} />
-<UseEffect fn={FUNCTION} inputs={[]} /> // Conditionally firing an effect via inputs
+<UseEffect fn={FUNCTION} inputs={[]} /> // Conditionally firing an effect
 ```
 
 ## Notes
