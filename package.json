@@ -9,7 +9,7 @@
   "types": "lib/index.d.ts",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "yarn storybook",
+    "start": "npm run storybook",
     "test": "echo using storybook...",
     "build": "tsc",
     "clean": "rimraf lib storybook-static",
@@ -31,16 +31,22 @@
     "warning": "^4.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
     "@storybook/addon-actions": "^5.0.5",
     "@storybook/addon-storysource": "^5.0.6",
     "@storybook/react": "^5.0.5",
     "@types/react": "^16.8.8",
     "@types/warning": "^3.0.0",
+    "babel-loader": "^8.0.5",
     "fork-ts-checker-webpack-plugin": "^1.0.0",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "rimraf": "^2.6.3",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.0.3",
-    "typescript": "^3.3.4000"
+    "typescript": "^3.3.4000",
+    "webpack": "^4.29.6"
   }
 }

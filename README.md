@@ -33,8 +33,8 @@ a possible middle-ground for a hook-like structure.
 
 ## Caveat Emptor
 
-This library provides an alternative `hooks` but does not aim to replace it.
-While it logically works, I would still suggest Hook adoption where possible.
+This library provides an alternative idea based on `hooks` but does not aim to replace it.
+I would still suggest adopting hooks instead where possible.
 
 ## Usage
 
@@ -55,7 +55,7 @@ The unhook examples makes use of `withState` HOC to keep
 the code style closer to the `hooks` examples. You can easily manage your state
 using a normal class.
 
-These examples are also available at [http://yeojz.github.io/react-unhook](http://yeojz.github.io/react-unhook)
+Examples are also available at [http://yeojz.github.io/react-unhook](http://yeojz.github.io/react-unhook)
 
 ### Effects Without Cleanup
 

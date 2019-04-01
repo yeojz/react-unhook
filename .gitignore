@@ -69,10 +69,9 @@ lib/
 
 .DS_Store
 
-src/parser.ts
-
 .cache/
 .puppet-master/
 
 storybook-static/
 package-lock.json
+/storybook-*
