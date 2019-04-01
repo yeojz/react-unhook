@@ -27,6 +27,13 @@
     "url": "https://github.com/yeojz/react-unhook/issues"
   },
   "homepage": "https://github.com/yeojz/react-unhook#readme",
+  "keywords": [
+    "hooks",
+    "react",
+    "unhook",
+    "components",
+    "function"
+  ],
   "dependencies": {
     "warning": "^4.0.3"
   },

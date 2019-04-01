@@ -8,6 +8,7 @@
 - [Caveat Emptor](#caveat-emptor)
 - [Usage](#usage)
 - [Example](#example)
+  - [Demo](#demo)
   - [Effects Without Cleanup](#effects-without-cleanup)
   - [Effects With Cleanup](#effects-with-cleanup)
 - [API Reference](#api-reference)
@@ -54,6 +55,8 @@ i.e. [https://reactjs.org/docs/hooks-effect.html](https://reactjs.org/docs/hooks
 The unhook examples makes use of `withState` HOC to keep
 the code style closer to the `hooks` examples. You can easily manage your state
 using a normal class.
+
+### Demo
 
 Examples are also available at [http://yeojz.github.io/react-unhook](http://yeojz.github.io/react-unhook)
 
@@ -166,8 +169,8 @@ const Component = withState('isOnline', 'setIsOnline', null)(FriendStatus);
 ### UseCallback
 
 ```jsx
-<UseCallback fn={FUNCTION} />
-<UseCallback fn={FUNCTION} inputs={[]} /> // Conditionally firing an callback
+<UseCallback fn={() => { /* do something */ }} />
+<UseCallback fn={() => { /* do something */ }} inputs={[]} /> // Conditionally firing an callback
 ```
 
 ### UseEffect
@@ -176,8 +179,18 @@ The difference between `UseEffect` and `UseCallback` is that the function
 passed into `UseEffect` may return a "clean-up" function which will be executed on unmount.
 
 ```jsx
-<UseEffect fn={FUNCTION} />
-<UseEffect fn={FUNCTION} inputs={[]} /> // Conditionally firing an effect
+<UseEffect fn={() => { /* do something */ }} />
+<UseEffect fn={() => { /* do something */ }} inputs={[]} /> // Conditionally firing an effect
+<UseEffect
+  fn={() => {
+    // do something
+
+    return () => {
+      // unsubscribe
+    };
+  }}
+  inputs={[]}
+/>
 ```
 
 ## Notes
