@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
-import { UseEffect } from '.';
+import React from 'react';
+import UseEffect from './UseEffect';
 import { CommonProps } from './utils';
 
 interface Props extends CommonProps {

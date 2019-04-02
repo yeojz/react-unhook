@@ -8,7 +8,7 @@ const STORIES = path.join(ROOT_DIR, 'stories');
 
 module.exports = function({ config }) {
   config.module.rules.push({
-    test: /\.story\.jsx?$/,
+    test: /\.story\.tsx?$/,
     loaders: [
       {
         loader: require.resolve('@storybook/addon-storysource/loader'),

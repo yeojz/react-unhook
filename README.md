@@ -20,6 +20,7 @@
   - [Additional Components](#additional-components)
     - [UseInterval](#useinterval)
     - [UseTimeout](#usetimeout)
+    - [UseGeolocation](#usegeolocation)
 - [License](#license)
 
 <!-- /TOC -->
@@ -202,6 +203,7 @@ interface CommonProps {
   comparator?: (left: Array<any>, right: Array<any>) => false | true; // i.e. isEqual
 }
 ```
+
 However, each component can have additional props attach to its use-case.
 
 ### Core Components
@@ -240,6 +242,12 @@ Most of the following components are implementations of the 2 core components.
 
 #### UseInterval
 
+```ts
+interface Props extends CommonProps {
+  time: number;
+}
+```
+
 ```jsx
 <UseInterval
   time={3000} // in milliseconds
@@ -251,6 +259,12 @@ Most of the following components are implementations of the 2 core components.
 
 #### UseTimeout
 
+```ts
+interface Props extends CommonProps {
+  time: number;
+}
+```
+
 ```jsx
 <UseTimeout
   time={3000} // in milliseconds
@@ -258,6 +272,16 @@ Most of the following components are implementations of the 2 core components.
     /* to be called after timeout */
   }}
 />
+```
+
+#### UseGeolocation
+
+```ts
+interface Props extends CommonProps {
+  fn: (success: Position | null, error: PositionError | null) => void;
+  watch?: boolean;
+  options?: PositionOptions;
+}
 ```
 
 ## License
