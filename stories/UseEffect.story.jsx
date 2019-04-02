@@ -83,6 +83,6 @@ const EffectsWithCleanupDemo = withState('friendID', 'setFriendID', 1)(
   }
 );
 
-storiesOf('UseEffect', module)
+storiesOf('Core|UseEffect', module)
   .add('Effects Without Cleanup', () => <EffectsWithoutCleanupDemo />)
   .add('Effects With Cleanup', () => <EffectsWithCleanupDemo />);

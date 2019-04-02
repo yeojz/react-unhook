@@ -46,6 +46,6 @@ const ConditionalCallbackDemo = withState('count', 'setCount', 0)(
   ConditionalExample
 );
 
-storiesOf('UseCallback', module)
+storiesOf('Core|UseCallback', module)
   .add('Always Callback', () => <AlwaysCallbackDemo />)
   .add('Conditional Callback', () => <ConditionalCallbackDemo />);

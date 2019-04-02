@@ -11,11 +11,15 @@
   - [Demo](#demo)
   - [Effects Without Cleanup](#effects-without-cleanup)
   - [Effects With Cleanup](#effects-with-cleanup)
-- [API Reference](#api-reference)
-  - [UseCallback](#usecallback)
-  - [UseEffect](#useeffect)
 - [Notes](#notes)
   - [Optimizing Performance by Skipping Effects / Callbacks](#optimizing-performance-by-skipping-effects--callbacks)
+- [API Reference](#api-reference)
+  - [Common Props](#common-props)
+  - [Core Components](#core-components)
+    - [UseCallback](#usecallback)
+    - [UseEffect](#useeffect)
+  - [Additional Components](#additional-components)
+    - [UseInterval](#useinterval)
 - [License](#license)
 
 <!-- /TOC -->
@@ -164,35 +168,6 @@ function FriendStatus(props) {
 const Component = withState('isOnline', 'setIsOnline', null)(FriendStatus);
 ```
 
-## API Reference
-
-### UseCallback
-
-```jsx
-<UseCallback fn={() => { /* do something */ }} />
-<UseCallback fn={() => { /* do something */ }} inputs={[]} /> // Conditionally firing an callback
-```
-
-### UseEffect
-
-The difference between `UseEffect` and `UseCallback` is that the function
-passed into `UseEffect` may return a "clean-up" function which will be executed on unmount.
-
-```jsx
-<UseEffect fn={() => { /* do something */ }} />
-<UseEffect fn={() => { /* do something */ }} inputs={[]} /> // Conditionally firing an effect
-<UseEffect
-  fn={() => {
-    // do something
-
-    return () => {
-      // unsubscribe
-    };
-  }}
-  inputs={[]}
-/>
-```
-
 ## Notes
 
 ### Optimizing Performance by Skipping Effects / Callbacks
@@ -213,6 +188,65 @@ Using Unhook:
     document.title = `You clicked ${count} times`;
   }}
   inputs={[count]}
+/>
+```
+
+## API Reference
+
+### Common Props
+
+All components will take in the following props:
+
+```ts
+interface Props {
+  fn: AnyFn;
+  inputs?: Array<any>;
+  comparator?: (left: Array<any>, right: Array<any>) => false | true; // i.e. isEqual
+}
+```
+
+### Core Components
+
+#### UseCallback
+
+```jsx
+<UseCallback
+  fn={() => {
+    /* do something */
+  }}
+/>
+```
+
+#### UseEffect
+
+The difference between `UseEffect` and `UseCallback` is that the function
+passed into `UseEffect` may return a "clean-up" function which will be executed on unmount.
+
+```jsx
+<UseEffect
+  fn={() => {
+    // do something
+
+    return () => {
+      // unsubscribe
+    };
+  }}
+  inputs={[]}
+/>
+```
+
+### Additional Components
+
+Most of the following components are implementations of the 2 core components.
+
+#### UseInterval
+
+```jsx
+<UseInterval
+  time={3000} // in milliseconds
+  fn={() => {
+    /* to be called at intervals*/
+  }}
 />
 ```
 
