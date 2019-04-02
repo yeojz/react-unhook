@@ -2,7 +2,9 @@ const path = require('path');
 const { compilerOptions } = require('../tsconfig.json');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const SRC_PATH = path.join(__dirname, '../src');
+const ROOT_DIR = path.join(__dirname, '..');
+const SOURCE = path.join(ROOT_DIR, 'src');
+const STORIES = path.join(ROOT_DIR, 'stories');
 
 module.exports = function({ config }) {
   config.module.rules.push({
@@ -19,18 +21,25 @@ module.exports = function({ config }) {
   config.module.rules.push({
     test: /\.tsx?$/,
     loader: 'ts-loader',
-    include: [SRC_PATH],
+    include: [SOURCE, STORIES],
     options: {
       transpileOnly: true, // use transpileOnly mode to speed-up compilation
       compilerOptions: {
         ...compilerOptions,
-        declaration: false
+        declaration: false,
+        rootDir: ROOT_DIR
       }
     }
   });
 
   config.resolve.extensions = ['.ts', '.tsx', '.js', '.jsx'];
-  config.plugins.push(new ForkTsCheckerWebpackPlugin());
+  config.plugins.push(
+    new ForkTsCheckerWebpackPlugin({
+      compilerOptions: {
+        rootDir: ROOT_DIR
+      }
+    })
+  );
 
   return config;
 };

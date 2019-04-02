@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import withState from './withState';
 import UseInterval from '../src/UseInterval';
 
-function Example(props) {
+function Example(props: any) {
   const { count, setCount } = props;
   const time = 1000;
 
@@ -24,4 +24,4 @@ function Example(props) {
 
 const Demo = withState('count', 'setCount', 0)(Example);
 
-storiesOf('Additional|UseInterval', module).add('Timer', () => <Demo />);
+storiesOf('2. Additional|UseInterval', module).add('Timer', () => <Demo />);

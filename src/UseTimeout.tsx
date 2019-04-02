@@ -6,7 +6,7 @@ interface Props extends CommonProps {
   time: number;
 }
 
-export default class UseInterval extends React.Component<Props> {
+export default class UseTimeout extends React.Component<Props> {
   run = () => {
     this.props.fn();
   };
@@ -15,10 +15,9 @@ export default class UseInterval extends React.Component<Props> {
     return (
       <UseEffect
         fn={() => {
-          const t = setInterval(this.run, this.props.time);
-
+          const t = setTimeout(this.run, this.props.time);
           return () => {
-            clearInterval(t);
+            clearTimeout(t);
           };
         }}
         inputs={[]}

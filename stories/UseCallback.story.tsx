@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import withState from './withState';
 import UseCallback from '../src/UseCallback';
 
-function Example(props) {
+function Example(props: any) {
   const { count, setCount } = props;
 
   return (
@@ -21,7 +21,7 @@ function Example(props) {
   );
 }
 
-function ConditionalExample(props) {
+function ConditionalExample(props: any) {
   const { count, setCount } = props;
 
   return (
@@ -46,6 +46,6 @@ const ConditionalCallbackDemo = withState('count', 'setCount', 0)(
   ConditionalExample
 );
 
-storiesOf('Core|UseCallback', module)
+storiesOf('1. Core|UseCallback', module)
   .add('Always Callback', () => <AlwaysCallbackDemo />)
   .add('Conditional Callback', () => <ConditionalCallbackDemo />);

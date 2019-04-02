@@ -19,5 +19,5 @@
     "outDir": "lib",
     "lib": ["es2018", "dom"]
   },
-  "exclude": ["node_modules", "lib"]
+  "exclude": ["node_modules", "lib", "stories"]
 }

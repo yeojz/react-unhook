@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import withState from './withState';
 import UseEffect from '../src/UseEffect';
 
-function Example(props) {
+function Example(props: any) {
   const { count, setCount } = props;
 
   return (
@@ -24,17 +24,17 @@ function Example(props) {
 const EffectsWithoutCleanupDemo = withState('count', 'setCount', 0)(Example);
 
 const ChatAPI = {
-  subscribeToFriendStatus: (id, handleStatusChange) => {
+  subscribeToFriendStatus: (id: number, handleStatusChange: Function) => {
     action('EffectsWithCleanup')(`Subscribed ${id}`);
     handleStatusChange({ isOnline: true });
   },
-  unsubscribeFromFriendStatus: (id, handleStatusChange) => {
+  unsubscribeFromFriendStatus: (id: number, handleStatusChange: Function) => {
     action('EffectsWithCleanup')(`Unsubscribed ${id}`);
     handleStatusChange({ isOnline: false });
   }
 };
 
-function FriendStatus(props) {
+function FriendStatus(props: any) {
   const { isOnline, setIsOnline } = props;
   return (
     <Fragment>
@@ -70,7 +70,6 @@ const EffectsWithCleanupDemo = withState('friendID', 'setFriendID', 1)(
     return (
       <Fragment>
         <EffectsWithCleanup friend={{ id: props.friendID }} />
-
         <label>Friend ID</label>
         <br />
         <input
@@ -83,6 +82,6 @@ const EffectsWithCleanupDemo = withState('friendID', 'setFriendID', 1)(
   }
 );
 
-storiesOf('Core|UseEffect', module)
+storiesOf('1. Core|UseEffect', module)
   .add('Effects Without Cleanup', () => <EffectsWithoutCleanupDemo />)
   .add('Effects With Cleanup', () => <EffectsWithCleanupDemo />);

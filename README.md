@@ -20,6 +20,7 @@
     - [UseEffect](#useeffect)
   - [Additional Components](#additional-components)
     - [UseInterval](#useinterval)
+    - [UseTimeout](#usetimeout)
 - [License](#license)
 
 <!-- /TOC -->
@@ -246,6 +247,17 @@ Most of the following components are implementations of the 2 core components.
   time={3000} // in milliseconds
   fn={() => {
     /* to be called at intervals*/
+  }}
+/>
+```
+
+#### UseTimeout
+
+```jsx
+<UseTimeout
+  time={3000} // in milliseconds
+  fn={() => {
+    /* to be called after timeout */
   }}
 />
 ```
