@@ -14,7 +14,6 @@
 - [Notes](#notes)
   - [Optimizing Performance by Skipping Effects / Callbacks](#optimizing-performance-by-skipping-effects--callbacks)
 - [API Reference](#api-reference)
-  - [Common Props](#common-props)
   - [Core Components](#core-components)
     - [UseCallback](#usecallback)
     - [UseEffect](#useeffect)
@@ -194,17 +193,16 @@ Using Unhook:
 
 ## API Reference
 
-### Common Props
-
-All components will take in the following props:
+All components takes in a set of common props:
 
 ```ts
-interface Props {
+interface CommonProps {
   fn: AnyFn;
   inputs?: Array<any>;
   comparator?: (left: Array<any>, right: Array<any>) => false | true; // i.e. isEqual
 }
 ```
+However, each component can have additional props attach to its use-case.
 
 ### Core Components
 
