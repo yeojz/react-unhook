@@ -32,7 +32,7 @@ changes the way we have been approaching React components. It addresses many of 
 need to choose a `class` component over `functional` component.
 
 `react-unhook` attempts to emulate some of the functionality and stylistic aspect of react hooks,
-packaging it into a standalone component **without** the use of react-hook under-the-hook.
+packaging it into a standalone component **without** the use of react-hook under-the-hood.
 
 **Use Case**: In the event the project you're on is not ready to adopt hooks, this library provides
 a possible middle-ground for a hook-like structure.
@@ -278,7 +278,7 @@ interface Props extends CommonProps {
 
 ```ts
 interface Props extends CommonProps {
-  fn: (success: Position | null, error: PositionError | null) => void;
+  fn: ( error: PositionError | null, success: Position | null) => void;
   watch?: boolean;
   options?: PositionOptions;
 }
