@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { CommonProps, areHookInputsEqual } from './utils';
+import { EqualityFn, areHookInputsEqual } from './utils';
 
-type Props = CommonProps;
+interface Props {
+  fn: () => void;
+  inputs?: Array<any>;
+  comparator?: EqualityFn;
+}
 
 export default class UseCallback extends React.Component<Props> {
   componentDidMount() {

@@ -1,9 +1,11 @@
 import * as React from 'react';
 import UseCallback from './UseCallback';
-import { CommonProps, Noop, noop } from './utils';
+import { EqualityFn, Noop, noop } from './utils';
 
-interface Props extends CommonProps {
-  fn: () => Noop | void;
+interface Props {
+  fn: () => void | Noop;
+  inputs?: Array<any>;
+  comparator?: EqualityFn;
 }
 
 export default class UseEffect extends React.Component<Props> {

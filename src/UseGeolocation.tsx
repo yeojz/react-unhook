@@ -1,14 +1,43 @@
 import React from 'react';
 import UseEffect from './UseEffect';
-import { CommonProps } from './utils';
+import { EqualityFn } from './utils';
 
-interface Props extends CommonProps {
-  fn: (error: PositionError | null, data: Position | null) => void;
+export interface GeolocationPosition {
+  coords: {
+    accuracy: number | null;
+    altitude: number | null;
+    altitudeAccuracy: number | null;
+    heading: number | null;
+    latitude: number | null;
+    longitude: number | null;
+    speed: number | null;
+  };
+  timestamp: number | null;
+}
+
+export interface GeolocationPositionError {
+  code: number;
+  message: string;
+  type: 'PERMISSION_DENIED' | 'POSITION_UNAVAILABLE' | 'TIMEOUT' | void;
+}
+
+interface Props {
+  fn: (
+    error: GeolocationPositionError | null,
+    data: GeolocationPosition | null
+  ) => void;
+  comparator?: EqualityFn;
   watch?: boolean;
   options?: PositionOptions;
 }
 
 export default class UseGeolocation extends React.Component<Props> {
+  static ERROR_CODES = {
+    1: 'PERMISSION_DENIED',
+    2: 'POSITION_UNAVAILABLE',
+    3: 'TIMEOUT'
+  };
+
   handleSuccess: PositionCallback = (evt: Position) => {
     this.props.fn(null, {
       coords: {
@@ -25,7 +54,14 @@ export default class UseGeolocation extends React.Component<Props> {
   };
 
   handleError: PositionErrorCallback = (err: PositionError) => {
-    this.props.fn(err, null);
+    this.props.fn(
+      {
+        code: err.code,
+        message: err.message,
+        type: UseGeolocation.ERROR_CODES[err.code]
+      },
+      null
+    );
   };
 
   render() {
@@ -36,14 +72,14 @@ export default class UseGeolocation extends React.Component<Props> {
 
           const { watch = false, options = {} } = this.props;
 
-          navigator.geolocation.getCurrentPosition(
-            this.handleSuccess,
-            this.handleError,
-            options
-          );
-
           if (watch) {
             watchID = navigator.geolocation.watchPosition(
+              this.handleSuccess,
+              this.handleError,
+              options
+            );
+          } else {
+            navigator.geolocation.getCurrentPosition(
               this.handleSuccess,
               this.handleError,
               options

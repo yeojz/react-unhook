@@ -4,33 +4,14 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 
 export const noop = () => void 0;
 
-export interface AnyFn {
-  (...args: Array<any>): void;
-}
-
-export interface InputsComparator {
+export interface EqualityFn {
   (nextDeps: Array<any>, prevDeps: Array<any> | null): boolean;
 }
 
 /**
- * Interface for setState
+ * Noop function
  */
-export interface SetState {
-  (value: Object | Function, callback?: Function): void;
-}
-
-/**
- * Common Props for "Use*" components
- */
-export interface CommonProps {
-  fn: AnyFn;
-  inputs?: Array<any>;
-  comparator?: InputsComparator;
-}
-
-export interface Noop {
-  (): void;
-}
+export type Noop = () => void;
 
 /**
  * Object.is

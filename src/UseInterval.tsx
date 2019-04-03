@@ -1,8 +1,10 @@
 import React from 'react';
 import UseEffect from './UseEffect';
-import { CommonProps } from './utils';
+import { EqualityFn } from './utils';
 
-interface Props extends CommonProps {
+interface Props {
+  fn: () => void;
+  comparator?: EqualityFn;
   time: number;
 }
 

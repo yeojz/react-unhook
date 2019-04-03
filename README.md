@@ -194,28 +194,16 @@ Using Unhook:
 
 ## API Reference
 
-All components takes in a set of common props:
-
-```ts
-interface CommonProps {
-  fn: AnyFn;
-  inputs?: Array<any>;
-  comparator?: (left: Array<any>, right: Array<any>) => false | true; // i.e. isEqual
-}
-```
-
-However, each component can have additional props attach to its use-case.
-
 ### Core Components
 
 #### UseCallback
 
-```jsx
-<UseCallback
-  fn={() => {
-    /* do something */
-  }}
-/>
+```ts
+interface Props {
+  fn: () => void;
+  inputs?: Array<any>;
+  comparator?: EqualityFn;
+}
 ```
 
 #### UseEffect
@@ -223,17 +211,12 @@ However, each component can have additional props attach to its use-case.
 The difference between `UseEffect` and `UseCallback` is that the function
 passed into `UseEffect` may return a "clean-up" function which will be executed on unmount.
 
-```jsx
-<UseEffect
-  fn={() => {
-    // do something
-
-    return () => {
-      // unsubscribe
-    };
-  }}
-  inputs={[]}
-/>
+```ts
+interface Props {
+  fn: () => void | Noop;
+  inputs?: Array<any>;
+  comparator?: EqualityFn;
+}
 ```
 
 ### Additional Components
@@ -243,42 +226,32 @@ Most of the following components are implementations of the 2 core components.
 #### UseInterval
 
 ```ts
-interface Props extends CommonProps {
+interface Props {
+  fn: () => void;
+  comparator?: EqualityFn;
   time: number;
 }
-```
-
-```jsx
-<UseInterval
-  time={3000} // in milliseconds
-  fn={() => {
-    /* to be called at intervals*/
-  }}
-/>
 ```
 
 #### UseTimeout
 
 ```ts
-interface Props extends CommonProps {
+interface Props {
+  fn: () => void;
+  comparator?: EqualityFn;
   time: number;
 }
-```
-
-```jsx
-<UseTimeout
-  time={3000} // in milliseconds
-  fn={() => {
-    /* to be called after timeout */
-  }}
-/>
 ```
 
 #### UseGeolocation
 
 ```ts
 interface Props extends CommonProps {
-  fn: ( error: PositionError | null, success: Position | null) => void;
+  fn: (
+    error: GeolocationPositionError | null,
+    data: GeolocationPosition | null
+  ) => void;
+  comparator?: EqualityFn;
   watch?: boolean;
   options?: PositionOptions;
 }
