@@ -26,7 +26,6 @@ interface Props {
     error: GeolocationPositionError | null,
     data: GeolocationPosition | null
   ) => void;
-  comparator?: EqualityFn;
   watch?: boolean;
   options?: PositionOptions;
 }
@@ -91,7 +90,6 @@ export default class UseGeolocation extends React.Component<Props> {
           };
         }}
         inputs={[]}
-        comparator={this.props.comparator}
       />
     );
   }

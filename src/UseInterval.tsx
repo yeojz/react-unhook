@@ -4,7 +4,6 @@ import { EqualityFn } from './utils';
 
 interface Props {
   fn: () => void;
-  comparator?: EqualityFn;
   time: number;
 }
 
@@ -24,7 +23,6 @@ export default class UseInterval extends React.Component<Props> {
           };
         }}
         inputs={[]}
-        comparator={this.props.comparator}
       />
     );
   }

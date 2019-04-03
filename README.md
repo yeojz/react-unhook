@@ -21,6 +21,7 @@
     - [UseInterval](#useinterval)
     - [UseTimeout](#usetimeout)
     - [UseGeolocation](#usegeolocation)
+    - [UseLeaveTarget](#useleavetarget)
 - [License](#license)
 
 <!-- /TOC -->
@@ -225,35 +226,49 @@ Most of the following components are implementations of the 2 core components.
 
 #### UseInterval
 
+Calls the function at every specified interval (in milliseconds).
+
 ```ts
 interface Props {
   fn: () => void;
-  comparator?: EqualityFn;
   time: number;
 }
 ```
 
 #### UseTimeout
 
+Calls the function after the specified wait time (in milliseconds)
+
 ```ts
 interface Props {
   fn: () => void;
-  comparator?: EqualityFn;
   time: number;
 }
 ```
 
 #### UseGeolocation
 
+Tracks user's geographic location.
+
 ```ts
-interface Props extends CommonProps {
+interface Props {
   fn: (
     error: GeolocationPositionError | null,
     data: GeolocationPosition | null
   ) => void;
-  comparator?: EqualityFn;
   watch?: boolean;
   options?: PositionOptions;
+}
+```
+
+#### UseLeaveTarget
+
+Fires a callback when mouse leaves target element.
+
+```ts
+interface Props {
+  fn: () => void;
+  target: HTMLElement | Window | Document;
 }
 ```
 
