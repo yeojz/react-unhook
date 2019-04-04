@@ -15,13 +15,13 @@
   - [Optimizing Performance by Skipping Effects / Callbacks](#optimizing-performance-by-skipping-effects--callbacks)
 - [API Reference](#api-reference)
   - [Core Components](#core-components)
-    - [UseCallback](#usecallback)
     - [UseEffect](#useeffect)
+    - [UseCallback](#usecallback)
   - [Additional Components](#additional-components)
     - [UseInterval](#useinterval)
     - [UseTimeout](#usetimeout)
     - [UseGeolocation](#usegeolocation)
-    - [UseLeaveTarget](#useleavetarget)
+    - [UseMouseOut](#usemouseout)
 - [License](#license)
 
 <!-- /TOC -->
@@ -197,24 +197,29 @@ Using Unhook:
 
 ### Core Components
 
-#### UseCallback
+#### UseEffect
+
+Component which emulates `useEffect` hook.
 
 ```ts
 interface Props {
-  fn: () => void;
+  fn: () => void | Noop;
   inputs?: Array<any>;
   comparator?: EqualityFn;
 }
 ```
 
-#### UseEffect
+#### UseCallback
 
 The difference between `UseEffect` and `UseCallback` is that the function
 passed into `UseEffect` may return a "clean-up" function which will be executed on unmount.
+In most cases, you can just utilise `UseEffect`.
+
+Sidenote: `UseEffect` actually uses `UseCallback` internally.
 
 ```ts
 interface Props {
-  fn: () => void | Noop;
+  fn: () => void;
   inputs?: Array<any>;
   comparator?: EqualityFn;
 }
@@ -226,7 +231,8 @@ Most of the following components are implementations of the 2 core components.
 
 #### UseInterval
 
-Calls the function at every specified interval (in milliseconds).
+Calls the function at every specified interval (in milliseconds),
+eg: Polling.
 
 ```ts
 interface Props {
@@ -261,14 +267,15 @@ interface Props {
 }
 ```
 
-#### UseLeaveTarget
+#### UseMouseOut
 
 Fires a callback when mouse leaves target element.
 
 ```ts
 interface Props {
   fn: () => void;
-  target: HTMLElement | Window | Document;
+  target: () => HTMLElement | Document | Window;
+  capture?: boolean;
 }
 ```
 
