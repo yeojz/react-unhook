@@ -1,10 +1,11 @@
 # react-unhook
 
-> React hooks without hooks. Collection of hook-like components.
+> React hooks without hooks - a collection of hook-like Null Components
 
 <!-- TOC depthFrom:2 -->
 
 - [Motivation](#motivation)
+- [The Idea / Proposal](#the-idea--proposal)
 - [Caveat Emptor](#caveat-emptor)
 - [Usage](#usage)
 - [Example](#example)
@@ -33,16 +34,41 @@
 changes the way we have been approaching React components. It addresses many of the reasons why we might
 need to choose a `class` component over `functional` component.
 
-`react-unhook` attempts to emulate some of the functionality and stylistic aspect of react hooks,
-packaging it into a standalone component **without** the use of react-hook under-the-hood.
+`react-unhook` attempts to emulate some of the functionality and segmentation aspect of react hooks,
+packaging it into a standalone "Null Components" **without** the use of react-hook under-the-hood.
 
-**Use Case**: In the event the project you're on is not ready to adopt hooks, this library provides
-a possible middle-ground for a hook-like structure.
+(p.s "Null Components" = components that render `null`)
+
+## The Idea / Proposal
+
+If we see components as functions, and if we encapsulate lifecycle / side-effect code
+into "Null Components", then effectively, we are just executing the logic "adjacent to"
+instead of "parent to" the children.
+
+**Use Case:** Imagine that you have a form that on certain value change, we want to fetch things.
+This can possible be the result using "Null Components"
+
+```jsx
+function SignupForm(props) {
+  return (
+    <Fragment>
+      <Input name="input-one" />
+      <Input name="input-two"/>
+      <Input name="input-three"/>
+
+      <FetchWhenInputOneIsFilled name="action-one" />
+      <FetchWhenActionOneIsComplete name="action-two" />
+      <FetchWhenInputTwoAndThreeIsFilled name="action-three" />
+      <SetStateWhenActionTwoAndThreeIsComplete name="action-four" />
+    </Fragment>
+  )
+}
+```
 
 ## Caveat Emptor
 
 This library provides an alternative idea based on `hooks` but does not aim to replace it.
-I would still suggest adopting hooks instead where possible.
+It's just another proposed way of segregating your React code.
 
 ## Usage
 
