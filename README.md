@@ -22,6 +22,7 @@
     - [UseTimeout](#usetimeout)
     - [UseGeolocation](#usegeolocation)
     - [UseMouseOut](#usemouseout)
+    - [UseEffectOnce](#useeffectonce)
 - [License](#license)
 
 <!-- /TOC -->
@@ -276,6 +277,16 @@ interface Props {
   fn: () => void;
   target: () => HTMLElement | Document | Window;
   capture?: boolean;
+}
+```
+
+#### UseEffectOnce
+
+Alias method using `UseEffect` with `prop.inputs` preset to `[]`
+
+```ts
+interface Props {
+  fn: () => void;
 }
 ```
 

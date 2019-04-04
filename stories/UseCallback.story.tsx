@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import withState from './withState';
+import withDemoHelper from './withDemoHelper';
 import UseCallback from '../src/UseCallback';
 
-function Example(props: any) {
+function AlwaysExample(props: any) {
   const { count, setCount } = props;
 
   return (
@@ -22,18 +22,38 @@ function Example(props: any) {
 }
 
 function ConditionalExample(props: any) {
-  const { count, setCount } = props;
+  const { count, setCount, called, setCalled } = props;
 
   return (
     <div>
-      <p>Update {count}</p>
-      <button onClick={() => setCount(count + 1)}>Update Prop</button>
+      <p>Update: {count}</p>
+      <p>Function called: {called}</p>
 
-      <p>Action log should only fire once</p>
+      <button onClick={() => setCount(count + 1)}>Update</button>
 
       <UseCallback
         fn={() => {
-          action('ConditionalCallback')(`You clicked ${count} times`);
+          setCalled(called + 1);
+        }}
+        inputs={[count]}
+      />
+    </div>
+  );
+}
+
+function OnceOnceExample(props: any) {
+  const { count, setCount, called, setCalled } = props;
+
+  return (
+    <div>
+      <p>Update: {count}</p>
+      <p>Function called: {called}</p>
+
+      <button onClick={() => setCount(count + 1)}>Update</button>
+
+      <UseCallback
+        fn={() => {
+          setCalled(called + 1);
         }}
         inputs={[]}
       />
@@ -41,11 +61,11 @@ function ConditionalExample(props: any) {
   );
 }
 
-const AlwaysCallbackDemo = withState('count', 'setCount', 0)(Example);
-const ConditionalCallbackDemo = withState('count', 'setCount', 0)(
-  ConditionalExample
-);
+const AlwaysDemo = withDemoHelper(AlwaysExample);
+const ConditionalDemo = withDemoHelper(ConditionalExample);
+const OnlyOnceDemo = withDemoHelper(OnceOnceExample);
 
 storiesOf('1. Core|UseCallback', module)
-  .add('Always Callback', () => <AlwaysCallbackDemo />)
-  .add('Conditional Callback', () => <ConditionalCallbackDemo />);
+  .add('Always Callback', () => <AlwaysDemo />)
+  .add('Conditional Callback', () => <ConditionalDemo />)
+  .add('Only Once Callback', () => <OnlyOnceDemo />);
