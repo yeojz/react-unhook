@@ -1,19 +1,21 @@
+<!-- markdownlint-disable MD033 -->
+<p align="center"><img src="./assets/react-unhook-logo.png" /></p>
+<!-- markdownlint-enable MD033 -->
+
 # react-unhook
 
 > React hooks without hooks - a collection of hook-like Null Components
 
 <!-- TOC depthFrom:2 -->
 
+- [About](#about)
 - [Motivation](#motivation)
-- [The Idea / Proposal](#the-idea--proposal)
-- [Caveat Emptor](#caveat-emptor)
 - [Usage](#usage)
 - [Example](#example)
-  - [Demo](#demo)
+  - [Demo / Storybook](#demo--storybook)
   - [Effects Without Cleanup](#effects-without-cleanup)
   - [Effects With Cleanup](#effects-with-cleanup)
-- [Notes](#notes)
-  - [Optimizing Performance by Skipping Effects / Callbacks](#optimizing-performance-by-skipping-effects--callbacks)
+  - [Optimizing Performance](#optimizing-performance)
 - [API Reference](#api-reference)
   - [Core Components](#core-components)
     - [UseEffect](#useeffect)
@@ -28,47 +30,44 @@
 
 <!-- /TOC -->
 
-## Motivation
-
-[React Hooks](https://reactjs.org/docs/hooks-intro.html) are a new addition to React 16.8 and it
-changes the way we have been approaching React components. It addresses many of the reasons why we might
-need to choose a `class` component over `functional` component.
+## About
 
 `react-unhook` attempts to emulate some of the functionality and segmentation aspect of react hooks,
 packaging it into a standalone "Null Components" **without** the use of react-hook under-the-hood.
 
 (p.s "Null Components" = components that render `null`)
 
-## The Idea / Proposal
+## Motivation
 
-If we see components as functions, and if we encapsulate lifecycle / side-effect code
-into "Null Components", then effectively, we are just executing the logic "adjacent to"
-instead of "parent to" the children.
+[React Hooks](https://reactjs.org/docs/hooks-intro.html) are a new addition to React 16.8 and it
+changes the way we have been approaching React components. It addresses many of the reasons why we might
+need to choose a `class` component over `functional` component.
 
-**Use Case:** Imagine that you have a form that on certain value change, we want to fetch things.
-This can possible be the result using "Null Components"
+However, if we see components as another form of functions, and encapsulate lifecycle / side-effect code
+into them as "Null Components", then effectively, it's another way of compartmentalising our code.
+
+Use Case:
 
 ```jsx
+// Imagine that you have a signup form that on certain value change,
+// we want to fetch things or asynchronously set values
+// This can possible be the result using "Null Components"
+
 function SignupForm(props) {
   return (
     <Fragment>
       <Input name="input-one" />
-      <Input name="input-two"/>
-      <Input name="input-three"/>
+      <Input name="input-two" />
+      <Input name="input-three" />
 
       <FetchWhenInputOneIsFilled name="action-one" />
       <FetchWhenActionOneIsComplete name="action-two" />
-      <FetchWhenInputTwoAndThreeIsFilled name="action-three" />
-      <SetStateWhenActionTwoAndThreeIsComplete name="action-four" />
+      <FetchWhenInputTwoThreeIsFilled name="action-three" />
+      <SetStateWhenAllActionsComplete name="action-four" />
     </Fragment>
-  )
+  );
 }
 ```
-
-## Caveat Emptor
-
-This library provides an alternative idea based on `hooks` but does not aim to replace it.
-It's just another proposed way of segregating your React code.
 
 ## Usage
 
@@ -85,11 +84,11 @@ import { UseCallback, UseEffect } from 'react-unhook';
 These examples are adopted from React's official docs on hooks.
 i.e. [https://reactjs.org/docs/hooks-effect.html](https://reactjs.org/docs/hooks-effect.html)
 
-The unhook examples makes use of `withState` HOC to keep
-the code style closer to the `hooks` examples. You can easily manage your state
+The unhook examples makes use of `withState` HOC ([1][with-state-local], [2][with-state-recompose]) to
+keep the code style closer to the `hooks` examples. You can also manage your state
 using a normal class.
 
-### Demo
+### Demo / Storybook
 
 Examples are also available at [http://yeojz.github.io/react-unhook](http://yeojz.github.io/react-unhook)
 
@@ -118,6 +117,8 @@ Using Unhook:
 
 ```jsx
 function Example(props) {
+  // assumes you're using withState HOC.
+  // eg: withState('count', 'setCount', 0)(Example);
   const { count, setCount } = props;
 
   return (
@@ -133,8 +134,6 @@ function Example(props) {
     </div>
   );
 }
-
-const Component = withState('count', 'setCount', 0)(Example);
 ```
 
 ### Effects With Cleanup
@@ -168,7 +167,8 @@ Using Unhook:
 
 ```jsx
 function FriendStatus(props) {
-  const { isOnline } = props;
+  // withState('isOnline', 'setIsOnline', null)(FriendStatus);
+  const { isOnline, setIsOnline } = props;
 
   return (
     <Fragment>
@@ -193,13 +193,9 @@ function FriendStatus(props) {
     </Fragment>
   );
 }
-
-const Component = withState('isOnline', 'setIsOnline', null)(FriendStatus);
 ```
 
-## Notes
-
-### Optimizing Performance by Skipping Effects / Callbacks
+### Optimizing Performance
 
 Using Hook:
 
@@ -238,11 +234,9 @@ interface Props {
 
 #### UseCallback
 
-The difference between `UseEffect` and `UseCallback` is that the function
-passed into `UseEffect` may return a "clean-up" function which will be executed on unmount.
-In most cases, you can just utilise `UseEffect`.
-
-Sidenote: `UseEffect` actually uses `UseCallback` internally.
+The difference between `UseEffect` and `UseCallback` is that the function passed
+into `UseEffect` may return a "clean-up" function which will be executed when unmounting
+the component. In most cases, you can just utilise `UseEffect`.
 
 ```ts
 interface Props {
@@ -319,3 +313,6 @@ interface Props {
 ## License
 
 `react-unhook` is [MIT licensed](./LICENSE)
+
+[with-state-local]: https://github.com/yeojz/react-unhook/blob/master/stories/withState.tsx
+[with-state-recompose]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate
