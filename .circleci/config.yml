@@ -81,7 +81,7 @@ aliases:
             npm run clean
             npm run build
       - run:
-          working_directory: ~/project/build
+          working_directory: ~/project
           name: publish to npm
           command: |
             echo "npm tag = $RUNTIME_NPM_TAG"
