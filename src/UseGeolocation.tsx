@@ -1,5 +1,6 @@
 import * as React from 'react';
 import UseEffect from './UseEffect';
+import { VoidFn } from './utils';
 
 export interface GeolocationPosition {
   coords: {
@@ -36,7 +37,7 @@ export default class UseGeolocation extends React.Component<Props> {
     3: 'TIMEOUT'
   };
 
-  handleSuccess: PositionCallback = (evt: Position) => {
+  handleSuccess: PositionCallback = (evt: Position): void => {
     this.props.fn(null, {
       coords: {
         accuracy: evt.coords.accuracy,
@@ -51,7 +52,7 @@ export default class UseGeolocation extends React.Component<Props> {
     });
   };
 
-  handleError: PositionErrorCallback = (err: PositionError) => {
+  handleError: PositionErrorCallback = (err: PositionError): void => {
     this.props.fn(
       {
         code: err.code,
@@ -62,10 +63,10 @@ export default class UseGeolocation extends React.Component<Props> {
     );
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <UseEffect
-        fn={() => {
+        fn={(): VoidFn => {
           let watchID: number;
 
           const { watch = false, options = {} } = this.props;
@@ -84,7 +85,7 @@ export default class UseGeolocation extends React.Component<Props> {
             );
           }
 
-          return () => {
+          return (): void => {
             navigator.geolocation.clearWatch(watchID);
           };
         }}

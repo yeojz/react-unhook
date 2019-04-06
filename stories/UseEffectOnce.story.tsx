@@ -1,9 +1,10 @@
+/* eslint-disable */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import withDemoHelper from './withDemoHelper';
 import UseEffectOnce from '../src/UseEffectOnce';
 
-function Example(props: any) {
+function Example(props) {
   const { count, setCount, called, setCalled } = props;
 
   return (

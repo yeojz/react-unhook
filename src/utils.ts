@@ -1,13 +1,16 @@
-export const noop = () => void 0;
+export const noop = (): void => void 0;
 
 export interface EqualityFn {
-  (nextDeps: Array<any>, prevDeps: Array<any> | null): boolean;
+  (
+    nextDeps: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
+    prevDeps: any[] | null // eslint-disable-line @typescript-eslint/no-explicit-any
+  ): boolean;
 }
 
 /**
- * Noop function
+ * Function that returns void
  */
-export type Noop = () => void;
+export type VoidFn = () => void;
 
 /**
  * Object.is
@@ -17,7 +20,10 @@ export type Noop = () => void;
  * @param y
  * @returns boolean
  */
-export const objectIs = (x: any, y: any): boolean => {
+export const objectIs = (
+  x: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+  y: any // eslint-disable-line @typescript-eslint/no-explicit-any
+): boolean => {
   if (x === y) {
     return x !== 0 || 1 / x === 1 / y;
   }
@@ -35,12 +41,14 @@ export const objectIs = (x: any, y: any): boolean => {
  * @returns boolean
  */
 export function areHookInputsEqual(
-  nextDeps: Array<any>,
-  prevDeps: Array<any> | null
-) {
+  nextDeps: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
+  prevDeps: any[] | null // eslint-disable-line @typescript-eslint/no-explicit-any
+): boolean {
   if (prevDeps === null) {
     return false;
   }
 
-  return nextDeps.every((value, idx) => objectIs(value, prevDeps[idx]));
+  return nextDeps.every(
+    (value, idx): boolean => objectIs(value, prevDeps[idx])
+  );
 }

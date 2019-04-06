@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -6,7 +7,7 @@ import UseEffect from '../src/UseEffect';
 
 const { Fragment } = React;
 
-function Example(props: any) {
+function Example(props) {
   const { count, setCount } = props;
 
   return (
@@ -36,7 +37,7 @@ const ChatAPI = {
   }
 };
 
-function FriendStatus(props: any) {
+function FriendStatus(props) {
   const { isOnline, setIsOnline } = props;
   return (
     <Fragment>

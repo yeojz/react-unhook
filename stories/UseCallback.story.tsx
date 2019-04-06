@@ -1,16 +1,17 @@
+/* eslint-disable */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import withDemoHelper from './withDemoHelper';
 import UseCallback from '../src/UseCallback';
 
-function AlwaysExample(props: any) {
+function AlwaysExample(props) {
   const { count, setCount } = props;
 
   return (
     <div>
       <p>Update {count}</p>
-      <button onClick={() => setCount(count + 1)}>Update Prop</button>
+      <button onClick={(): void => setCount(count + 1)}>Update Prop</button>
 
       <UseCallback
         fn={() => {
@@ -21,7 +22,7 @@ function AlwaysExample(props: any) {
   );
 }
 
-function ConditionalExample(props: any) {
+function ConditionalExample(props) {
   const { count, setCount, called, setCalled } = props;
 
   return (
@@ -29,7 +30,7 @@ function ConditionalExample(props: any) {
       <p>Update: {count}</p>
       <p>Function called: {called}</p>
 
-      <button onClick={() => setCount(count + 1)}>Update</button>
+      <button onClick={(): void => setCount(count + 1)}>Update</button>
 
       <UseCallback
         fn={() => {
@@ -41,7 +42,7 @@ function ConditionalExample(props: any) {
   );
 }
 
-function OnceOnceExample(props: any) {
+function OnceOnceExample(props) {
   const { count, setCount, called, setCalled } = props;
 
   return (
@@ -49,10 +50,10 @@ function OnceOnceExample(props: any) {
       <p>Update: {count}</p>
       <p>Function called: {called}</p>
 
-      <button onClick={() => setCount(count + 1)}>Update</button>
+      <button onClick={(): void => setCount(count + 1)}>Update</button>
 
       <UseCallback
-        fn={() => {
+        fn={(): void => {
           setCalled(called + 1);
         }}
         inputs={[]}

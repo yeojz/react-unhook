@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import withState from './withState';
@@ -6,7 +7,7 @@ import compose from './compose';
 
 const { Fragment } = React;
 
-function Example(props: any) {
+function Example(props) {
   const { mounted, setMounted, state, setState } = props;
 
   return (

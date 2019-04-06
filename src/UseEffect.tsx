@@ -1,26 +1,26 @@
 import * as React from 'react';
 import UseCallback from './UseCallback';
-import { EqualityFn, Noop, noop } from './utils';
+import { EqualityFn, VoidFn, noop } from './utils';
 
 interface Props {
-  fn: () => void | Noop;
-  inputs?: Array<any>;
+  fn: () => void | VoidFn;
+  inputs?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
   comparator?: EqualityFn;
 }
 
 export default class UseEffect extends React.Component<Props> {
-  unsub: Noop = noop;
+  unsub: VoidFn = noop;
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     this.unsub();
   }
 
-  callback = () => {
+  callback = (): void => {
     this.unsub();
     this.unsub = this.props.fn() || noop;
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <UseCallback
         fn={this.callback}

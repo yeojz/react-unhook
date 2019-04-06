@@ -1,5 +1,6 @@
 import * as React from 'react';
 import UseEffect from './UseEffect';
+import { VoidFn } from './utils';
 
 interface Props {
   fn: () => void;
@@ -19,17 +20,17 @@ export default class UseMouseOut extends React.Component<Props> {
     }
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <UseEffect
-        fn={() => {
+        fn={(): VoidFn => {
           const options: EventListenerOptions = {
             capture: this.props.capture
           };
 
           window.addEventListener('mouseout', this.handler, options);
 
-          return () => {
+          return (): void => {
             window.removeEventListener('mouseout', this.handler, options);
           };
         }}

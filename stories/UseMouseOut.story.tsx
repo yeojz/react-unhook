@@ -1,9 +1,10 @@
+/* eslint-disable */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import withState from './withState';
 import UseMouseOut from '../src/UseMouseOut';
 
-function Example(props: any) {
+function Example(props) {
   const { count, setCount } = props;
 
   return (
@@ -22,14 +23,14 @@ function Example(props: any) {
 
 const PageExample = withState('count', 'setCount', 0)(Example);
 
-class ElementExample extends React.Component<any> {
+class ElementExample extends React.Component {
   state = {
     count: 0
   };
 
-  elem: any;
+  elem = void 0;
 
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     this.elem = React.createRef();

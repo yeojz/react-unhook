@@ -1,5 +1,6 @@
 import * as React from 'react';
 import UseEffect from './UseEffect';
+import { VoidFn } from './utils';
 
 interface Props {
   fn: () => void;
@@ -7,16 +8,16 @@ interface Props {
 }
 
 export default class UseTimeout extends React.Component<Props> {
-  run = () => {
+  run = (): void => {
     this.props.fn();
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <UseEffect
-        fn={() => {
+        fn={(): VoidFn => {
           const t = setTimeout(this.run, this.props.time);
-          return () => {
+          return (): void => {
             clearTimeout(t);
           };
         }}

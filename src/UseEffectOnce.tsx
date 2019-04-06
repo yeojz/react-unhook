@@ -5,7 +5,9 @@ interface Props {
   fn: () => void;
 }
 
-const UseEffectOnce: React.FunctionComponent<Props> = props => {
+const UseEffectOnce: React.FunctionComponent<Props> = (
+  props: Props
+): JSX.Element => {
   return <UseEffect fn={props.fn} inputs={[]} />;
 };
 

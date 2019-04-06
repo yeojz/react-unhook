@@ -3,16 +3,16 @@ import { EqualityFn, areHookInputsEqual } from './utils';
 
 interface Props {
   fn: () => void;
-  inputs?: Array<any>;
+  inputs?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
   comparator?: EqualityFn;
 }
 
 export default class UseCallback extends React.Component<Props> {
-  componentDidMount() {
+  componentDidMount(): void {
     this.props.fn();
   }
 
-  shouldComponentUpdate(nextProps: Props) {
+  shouldComponentUpdate(nextProps: Props): boolean {
     const { inputs: prevDeps = null } = this.props;
     const {
       comparator = areHookInputsEqual,
@@ -26,11 +26,11 @@ export default class UseCallback extends React.Component<Props> {
     return !comparator(nextDeps, prevDeps);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     this.props.fn();
   }
 
-  render() {
+  render(): null {
     return null;
   }
 }
