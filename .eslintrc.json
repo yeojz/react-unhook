@@ -11,10 +11,7 @@
     "sourceType": "module",
     "ecmaVersion": 2017
   },
-  "plugins": [
-    "prettier",
-    "react"
-  ],
+  "plugins": ["prettier", "react"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",

@@ -1,16 +1,12 @@
-export const noop = (): void => void 0;
-
-export interface EqualityFn {
-  (
-    nextDeps: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
-    prevDeps: any[] | null // eslint-disable-line @typescript-eslint/no-explicit-any
-  ): boolean;
-}
-
 /**
- * Function that returns void
+ * Any function that returns undefined.
  */
 export type VoidFn = () => void;
+
+/**
+ * Function that returns undefined
+ */
+export const noop = (): void => undefined;
 
 /**
  * Object.is
@@ -18,11 +14,10 @@ export type VoidFn = () => void;
  *
  * @param x
  * @param y
- * @returns boolean
  */
 export const objectIs = (
-  x: any, // eslint-disable-line @typescript-eslint/no-explicit-any
-  y: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  x?: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+  y?: any // eslint-disable-line @typescript-eslint/no-explicit-any
 ): boolean => {
   if (x === y) {
     return x !== 0 || 1 / x === 1 / y;
@@ -32,13 +27,21 @@ export const objectIs = (
 };
 
 /**
+ * Interface for the comparator function
+ */
+export interface EqualityFn {
+  (
+    nextDeps: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
+    prevDeps: any[] | null // eslint-disable-line @typescript-eslint/no-explicit-any
+  ): boolean;
+}
+
+/**
  * Compares 2 arrays using Object.is comparison on their values
  * Adapted from react-dom/src/server/ReactPartialRendererHooks.js
  *
  * @param nextDeps
  * @param prevDeps
- *
- * @returns boolean
  */
 export function areHookInputsEqual(
   nextDeps: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
