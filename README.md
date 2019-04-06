@@ -6,6 +6,11 @@
 
 > React hooks without hooks - a collection of hook-like Null Components
 
+[![npm][npm-badge]][npm-link]
+[![Build Status][circle-badge]][circle-link]
+[![Coverage Status][codecov-badge]][codecov-link]
+[![TypeScript Support][type-ts-badge]][type-ts-link]
+
 <!-- TOC depthFrom:2 -->
 
 - [About](#about)
@@ -46,7 +51,7 @@ need to choose a `class` component over `functional` component.
 However, if we see components as another form of functions, and encapsulate lifecycle / side-effect code
 into them as "Null Components", then effectively, it's another way of compartmentalising our code.
 
-Use Case:
+**Use Case**:
 
 ```jsx
 // Imagine that you have a signup form that on certain value change,
@@ -90,7 +95,7 @@ using a normal class.
 
 ### Demo / Storybook
 
-Examples are also available at [http://yeojz.github.io/react-unhook](http://yeojz.github.io/react-unhook)
+Examples are also available at [http://yeojz.github.io/react-unhook][project-docs-link]
 
 ### Effects Without Cleanup
 
@@ -313,6 +318,16 @@ interface Props {
 ## License
 
 `react-unhook` is [MIT licensed](./LICENSE)
+
+[npm-badge]: https://img.shields.io/npm/v/react-unhook.svg?style=flat-square
+[npm-link]: https://www.npmjs.com/package/react-unhook
+[circle-badge]: https://img.shields.io/circleci/project/github/yeojz/react-unhook/master.svg?style=flat-square
+[circle-link]: https://circleci.com/gh/yeojz/react-unhook
+[type-ts-badge]: https://img.shields.io/badge/typedef-.d.ts-blue.svg?style=flat-square&longCache=true
+[type-ts-link]: https://github.com/yeojz/react-unhook/tree/master/src/index.ts
+[codecov-badge]: https://img.shields.io/codecov/c/github/yeojz/react-unhook/master.svg?style=flat-square
+[codecov-link]: https://codecov.io/gh/yeojz/react-unhook
+[project-docs-link]: https://yeojz.github.io/react-unhook
 
 [with-state-local]: https://github.com/yeojz/react-unhook/blob/master/stories/withState.tsx
 [with-state-recompose]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate
