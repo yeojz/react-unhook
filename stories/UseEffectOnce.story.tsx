@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import withDemoHelper from './withDemoHelper';
 import UseEffectOnce from '../src/UseEffectOnce';

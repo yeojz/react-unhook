@@ -20,3 +20,5 @@ webpack.config.js
 
 .storybook
 storybook-*
+.rpt2_cache
+

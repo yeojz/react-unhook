@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import withState from './withState';
 import UseInterval from '../src/UseInterval';

@@ -1,6 +1,5 @@
-import React from 'react';
+import * as React from 'react';
 import UseEffect from './UseEffect';
-import { EqualityFn } from './utils';
 
 interface Props {
   fn: () => void;

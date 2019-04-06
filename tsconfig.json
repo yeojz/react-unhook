@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
     "moduleResolution": "node",
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "declaration": true,
@@ -11,13 +8,11 @@
     "rootDir": "src",
     "sourceMap": false,
     "strict": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
-    "outDir": "lib",
-    "lib": ["es2018", "dom"]
+    "outDir": "lib"
   },
   "exclude": ["node_modules", "lib", "stories"]
 }

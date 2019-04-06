@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import withState from './withState';
 import UseGeolocation from '../src/UseGeolocation';
 import compose from './compose';
+
+const { Fragment } = React;
 
 function Example(props: any) {
   const { mounted, setMounted, state, setState } = props;
@@ -45,8 +47,8 @@ storiesOf('2. Additional|UseGeolocation', module)
     <Fragment>
       <Demo watch />
       <p>
-        <strong>Note:</strong> You'll need to use your browser devtools sensors to
-        simulate location changes.
+        <strong>Note:</strong> You'll need to use your browser devtools sensors
+        to simulate location changes.
       </p>
     </Fragment>
   ));

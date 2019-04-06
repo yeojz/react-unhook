@@ -75,3 +75,5 @@ lib/
 storybook-static/
 package-lock.json
 /storybook-*
+
+.rpt2_cache
