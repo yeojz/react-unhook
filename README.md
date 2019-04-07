@@ -26,11 +26,12 @@
     - [UseEffect](#useeffect)
     - [UseCallback](#usecallback)
   - [Additional Components](#additional-components)
+    - [UseEffectOnUpdate](#useeffectonupdate)
+    - [UseEffectOnce](#useeffectonce)
     - [UseInterval](#useinterval)
     - [UseTimeout](#usetimeout)
     - [UseGeolocation](#usegeolocation)
     - [UseMouseOut](#usemouseout)
-    - [UseEffectOnce](#useeffectonce)
 - [License](#license)
 
 <!-- /TOC -->
@@ -255,6 +256,28 @@ interface Props {
 
 Most of the following components are implementations of the 2 core components.
 
+#### UseEffectOnUpdate
+
+Only runs the callback when inputs change and not during mounting.
+
+```ts
+interface Props {
+  fn: () => void | VoidFn;
+  inputs?: any[];
+  comparator?: EqualityFn;
+}
+```
+
+#### UseEffectOnce
+
+Alias method using `UseEffect` with `prop.inputs` preset to `[]`
+
+```ts
+interface Props {
+  fn: () => void;
+}
+```
+
 #### UseInterval
 
 Calls the function at every specified interval (in milliseconds),
@@ -305,16 +328,6 @@ interface Props {
 }
 ```
 
-#### UseEffectOnce
-
-Alias method using `UseEffect` with `prop.inputs` preset to `[]`
-
-```ts
-interface Props {
-  fn: () => void;
-}
-```
-
 ## License
 
 `react-unhook` is [MIT licensed](./LICENSE)
@@ -328,6 +341,5 @@ interface Props {
 [codecov-badge]: https://img.shields.io/codecov/c/github/yeojz/react-unhook/master.svg?style=flat-square
 [codecov-link]: https://codecov.io/gh/yeojz/react-unhook
 [project-docs-link]: https://yeojz.github.io/react-unhook
-
 [with-state-local]: https://github.com/yeojz/react-unhook/blob/master/stories/withState.tsx
 [with-state-recompose]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate

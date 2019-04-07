@@ -2,7 +2,7 @@ import * as React from 'react';
 import { render } from 'react-testing-library';
 import UseEffectOnce from './UseEffectOnce';
 
-test('should call props.fn once even when rerendering', (): void => {
+test('should call props.fn only once', (): void => {
   const fn = jest.fn();
   const { rerender } = render(<UseEffectOnce fn={fn} />);
 
