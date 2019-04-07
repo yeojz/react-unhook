@@ -28,10 +28,13 @@
   - [Additional Components](#additional-components)
     - [UseEffectOnUpdate](#useeffectonupdate)
     - [UseEffectOnce](#useeffectonce)
+    - [UseMount](#usemount)
+    - [UseUnmount](#useunmount)
     - [UseInterval](#useinterval)
     - [UseTimeout](#usetimeout)
     - [UseGeolocation](#usegeolocation)
     - [UseMouseOut](#usemouseout)
+- [References](#references)
 - [License](#license)
 
 <!-- /TOC -->
@@ -278,6 +281,26 @@ interface Props {
 }
 ```
 
+#### UseMount
+
+Calls a function when the component is mounted
+
+```ts
+interface Props {
+  fn: () => void;
+}
+```
+
+#### UseUnmount
+
+Calls a function when the component will unmount.
+
+```ts
+interface Props {
+  fn: () => void;
+}
+```
+
 #### UseInterval
 
 Calls the function at every specified interval (in milliseconds),
@@ -327,6 +350,11 @@ interface Props {
   capture?: boolean;
 }
 ```
+
+## References
+
+Most of the "additional components" are a port of [react-use](https://github.com/streamich/react-use),
+but using react-unhook's `<UseEffect />` component instead of actual React Hooks.
 
 ## License
 
