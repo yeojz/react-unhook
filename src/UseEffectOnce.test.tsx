@@ -7,5 +7,5 @@ test('should call props.fn only once', (): void => {
   const { rerender } = render(<UseEffectOnce fn={fn} />);
 
   rerender(<UseEffectOnce fn={fn} />);
-  expect(fn).toHaveBeenCalledTimes(1);
+  expect(fn).toBeCalledTimes(1);
 });

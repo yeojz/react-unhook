@@ -67,7 +67,7 @@ test('should use getCurrentPosition correctly', (): void => {
   render(<UseGeolocation fn={fn} />);
 
   const { getCurrentPosition } = navigator.geolocation;
-  expect(getCurrentPosition).toHaveBeenCalled();
+  expect(getCurrentPosition).toBeCalled();
 });
 
 test('should use watchPosition correctly', (): void => {
@@ -75,7 +75,7 @@ test('should use watchPosition correctly', (): void => {
   render(<UseGeolocation fn={fn} watch />);
 
   const { watchPosition } = navigator.geolocation;
-  expect(watchPosition).toHaveBeenCalled();
+  expect(watchPosition).toBeCalled();
 });
 
 test('should clearWatch on unmount', (): void => {
@@ -85,21 +85,21 @@ test('should clearWatch on unmount', (): void => {
   unmount();
 
   const { clearWatch } = navigator.geolocation;
-  expect(clearWatch).toHaveBeenCalled();
+  expect(clearWatch).toBeCalled();
 });
 
 test('should call props.fn with expected success / failure', (): void => {
   const fn = jest.fn();
   render(<UseGeolocation fn={fn} />);
 
-  expect(fn).toHaveBeenCalledTimes(0);
+  expect(fn).toBeCalledTimes(0);
   const { getCurrentPosition } = navigator.geolocation;
 
   // @ts-ignore
   const [handleSuccess, handleError] = getCurrentPosition.mock.calls[0];
 
   handleSuccess(mockPosition);
-  expect(fn).toHaveBeenCalledTimes(1);
+  expect(fn).toBeCalledTimes(1);
 
   expect(fn).lastCalledWith(null, {
     coords: {
@@ -115,7 +115,7 @@ test('should call props.fn with expected success / failure', (): void => {
   });
 
   handleError(mockError);
-  expect(fn).toHaveBeenCalledTimes(2);
+  expect(fn).toBeCalledTimes(2);
 
   expect(fn).lastCalledWith(
     {

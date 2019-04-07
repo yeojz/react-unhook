@@ -9,7 +9,7 @@ test('should call props.fn at every interval', async (): Promise<void> => {
   const next = async (count: number): Promise<void> =>
     await wait(
       (): void => {
-        expect(fn).toHaveBeenCalledTimes(count);
+        expect(fn).toBeCalledTimes(count);
       }
     );
 

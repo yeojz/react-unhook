@@ -9,7 +9,7 @@ test('should call unsub when unmounting', (): void => {
 
   unmount();
 
-  expect(unsub).toHaveBeenCalledTimes(1);
+  expect(unsub).toBeCalledTimes(1);
 });
 
 test('should unsub from prev and re-sub when new inputs', (): void => {
@@ -17,10 +17,10 @@ test('should unsub from prev and re-sub when new inputs', (): void => {
   const fn = jest.fn((): jest.Mock<unknown> => unsub);
 
   const { rerender } = render(<UseEffect fn={fn} inputs={[1]} />);
-  expect(unsub).not.toHaveBeenCalled();
+  expect(unsub).not.toBeCalled();
 
   rerender(<UseEffect fn={fn} inputs={[2]} />);
-  expect(unsub).toHaveBeenCalledTimes(1);
+  expect(unsub).toBeCalledTimes(1);
 });
 
 test('should not fail unsub if props.fn does not return a function', (): void => {

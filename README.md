@@ -227,6 +227,9 @@ Using Unhook:
 
 ## API Reference
 
+**Note:** The comparator function, by default, follows React Hook's `areHookInputsEqual` method,
+which uses `Object.is` to compare the values in the array.
+
 ### Core Components
 
 #### UseEffect

@@ -6,11 +6,11 @@ test('should call props.fn after timeout', async (): Promise<void> => {
   const fn = jest.fn();
   render(<UseTimeout fn={fn} time={50} />);
 
-  expect(fn).toHaveBeenCalledTimes(0);
+  expect(fn).toBeCalledTimes(0);
 
   await wait(
     (): void => {
-      expect(fn).toHaveBeenCalledTimes(1);
+      expect(fn).toBeCalledTimes(1);
     }
   );
 });
