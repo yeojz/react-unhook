@@ -32,4 +32,4 @@ function Example(props) {
 
 const Demo = withState('mounted', 'setMounted', false)(Example);
 
-storiesOf('2. Additional|UseMount', module).add('Demo', () => <Demo />);
+storiesOf('Lifecycle|UseMount', module).add('Demo', () => <Demo />);

@@ -69,6 +69,6 @@ class ElementExample extends React.Component {
   }
 }
 
-storiesOf('2. Additional|UseMouseOut', module)
+storiesOf('UI|UseMouseOut', module)
   .add('Full page', () => <PageExample />)
   .add('Specifc element', () => <ElementExample />);

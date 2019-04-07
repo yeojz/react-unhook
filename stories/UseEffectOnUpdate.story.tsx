@@ -29,6 +29,4 @@ function Example(props) {
 
 const Demo = withDemoHelper(Example);
 
-storiesOf('2. Additional|UseEffectOnUpdate', module).add('Demo', () => (
-  <Demo />
-));
+storiesOf('Lifecycle|UseEffectOnUpdate', module).add('Demo', () => <Demo />);

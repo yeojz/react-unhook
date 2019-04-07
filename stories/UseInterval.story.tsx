@@ -25,4 +25,4 @@ function Example(props) {
 
 const Demo = withState('count', 'setCount', 0)(Example);
 
-storiesOf('2. Additional|UseInterval', module).add('Demo', () => <Demo />);
+storiesOf('Timing|UseInterval', module).add('Demo', () => <Demo />);

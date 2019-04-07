@@ -26,14 +26,18 @@
     - [UseEffect](#useeffect)
     - [UseCallback](#usecallback)
   - [Additional Components](#additional-components)
-    - [UseEffectOnUpdate](#useeffectonupdate)
-    - [UseEffectOnce](#useeffectonce)
-    - [UseMount](#usemount)
-    - [UseUnmount](#useunmount)
-    - [UseInterval](#useinterval)
-    - [UseTimeout](#usetimeout)
-    - [UseGeolocation](#usegeolocation)
-    - [UseMouseOut](#usemouseout)
+    - [Lifecycle](#lifecycle)
+      - [UseEffectOnUpdate](#useeffectonupdate)
+      - [UseEffectOnce](#useeffectonce)
+      - [UseMount](#usemount)
+      - [UseUnmount](#useunmount)
+    - [Timing](#timing)
+      - [UseInterval](#useinterval)
+      - [UseTimeout](#usetimeout)
+    - [Sensors](#sensors)
+      - [UseGeolocation](#usegeolocation)
+    - [UI](#ui)
+      - [UseMouseOut](#usemouseout)
 - [References](#references)
 - [License](#license)
 
@@ -260,9 +264,11 @@ interface Props {
 
 ### Additional Components
 
-Most of the following components are implementations of the 2 core components.
+These components are implementations of the 2 core components.
 
-#### UseEffectOnUpdate
+#### Lifecycle
+
+##### UseEffectOnUpdate
 
 Only runs the callback when inputs change and not during mounting.
 
@@ -274,7 +280,7 @@ interface Props {
 }
 ```
 
-#### UseEffectOnce
+##### UseEffectOnce
 
 Alias method using `UseEffect` with `prop.inputs` preset to `[]`
 
@@ -284,7 +290,7 @@ interface Props {
 }
 ```
 
-#### UseMount
+##### UseMount
 
 Calls a function when the component is mounted
 
@@ -294,7 +300,7 @@ interface Props {
 }
 ```
 
-#### UseUnmount
+##### UseUnmount
 
 Calls a function when the component will unmount.
 
@@ -304,7 +310,9 @@ interface Props {
 }
 ```
 
-#### UseInterval
+#### Timing
+
+##### UseInterval
 
 Calls the function at every specified interval (in milliseconds),
 eg: Polling.
@@ -316,7 +324,7 @@ interface Props {
 }
 ```
 
-#### UseTimeout
+##### UseTimeout
 
 Calls the function after the specified wait time (in milliseconds)
 
@@ -327,7 +335,9 @@ interface Props {
 }
 ```
 
-#### UseGeolocation
+#### Sensors
+
+##### UseGeolocation
 
 Tracks user's geographic location.
 
@@ -342,7 +352,9 @@ interface Props {
 }
 ```
 
-#### UseMouseOut
+#### UI
+
+##### UseMouseOut
 
 Fires a callback when mouse leaves target element.
 

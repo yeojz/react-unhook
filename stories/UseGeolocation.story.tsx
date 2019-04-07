@@ -42,7 +42,7 @@ const Demo = compose(
   withState('state', 'setState', {})
 )(Example);
 
-storiesOf('2. Additional|UseGeolocation', module)
+storiesOf('Sensors|UseGeolocation', module)
   .add('No Watcher', () => <Demo />)
   .add('With Watcher', () => (
     <Fragment>

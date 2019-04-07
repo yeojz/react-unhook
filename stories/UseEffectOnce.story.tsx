@@ -24,4 +24,4 @@ function Example(props) {
 
 const Demo = withDemoHelper(Example);
 
-storiesOf('2. Additional|UseEffectOnce', module).add('Demo', () => <Demo />);
+storiesOf('Lifecycle|UseEffectOnce', module).add('Demo', () => <Demo />);

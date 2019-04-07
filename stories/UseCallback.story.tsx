@@ -66,7 +66,7 @@ const AlwaysDemo = withDemoHelper(AlwaysExample);
 const ConditionalDemo = withDemoHelper(ConditionalExample);
 const OnlyOnceDemo = withDemoHelper(OnceOnceExample);
 
-storiesOf('1. Core|UseCallback', module)
+storiesOf('Core|UseCallback', module)
   .add('Always Callback', () => <AlwaysDemo />)
   .add('Conditional Callback', () => <ConditionalDemo />)
   .add('Only Once Callback', () => <OnlyOnceDemo />);
