@@ -17,10 +17,9 @@ export default class UseEffectOnUpdate extends React.Component<Props, State> {
     mounted: false
   };
 
-  callback = (): void => {
+  callback = (): void | VoidFn => {
     if (this.state.mounted) {
-      this.props.fn();
-      return;
+      return this.props.fn();
     }
 
     this.setState({ mounted: true });
