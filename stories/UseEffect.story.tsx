@@ -4,10 +4,36 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import withState from './withState';
 import UseEffect from '../src/UseEffect';
+import withDemoHelper from './withDemoHelper';
 
 const { Fragment } = React;
 
 function Example(props) {
+  const { count, setCount, called, setCalled } = props;
+
+  return (
+    <div>
+      <p>Update: {count}</p>
+      <p>Function Called: {called}</p>
+      <button onClick={() => setCount(count + 1)}>Update</button>
+
+      <p>
+        {`(Use "<UseEffectOnUpdate>" instead if you want "Function Called" to start from 0)`}
+      </p>
+
+      <UseEffect
+        fn={() => {
+          setCalled(called + 1);
+        }}
+        inputs={[count]}
+      />
+    </div>
+  );
+}
+
+const Demo = withDemoHelper(Example);
+
+function WithoutCleanup(props) {
   const { count, setCount } = props;
 
   return (
@@ -24,7 +50,9 @@ function Example(props) {
   );
 }
 
-const EffectsWithoutCleanupDemo = withState('count', 'setCount', 0)(Example);
+const EffectsWithoutCleanupDemo = withState('count', 'setCount', 0)(
+  WithoutCleanup
+);
 
 const ChatAPI = {
   subscribeToFriendStatus: (id: number, handleStatusChange: Function) => {
@@ -86,5 +114,6 @@ const EffectsWithCleanupDemo = withState('friendID', 'setFriendID', 1)(
 );
 
 storiesOf('1. Core|UseEffect', module)
+  .add('Demo', () => <Demo />)
   .add('Effects Without Cleanup', () => <EffectsWithoutCleanupDemo />)
   .add('Effects With Cleanup', () => <EffectsWithCleanupDemo />);

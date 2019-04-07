@@ -28,7 +28,7 @@ function ConditionalExample(props) {
   return (
     <div>
       <p>Update: {count}</p>
-      <p>Function called: {called}</p>
+      <p>Function Called: {called}</p>
 
       <button onClick={(): void => setCount(count + 1)}>Update</button>
 
@@ -48,7 +48,7 @@ function OnceOnceExample(props) {
   return (
     <div>
       <p>Update: {count}</p>
-      <p>Function called: {called}</p>
+      <p>Function Called: {called}</p>
 
       <button onClick={(): void => setCount(count + 1)}>Update</button>
 

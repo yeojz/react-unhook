@@ -48,7 +48,7 @@ storiesOf('2. Additional|UseGeolocation', module)
     <Fragment>
       <Demo watch />
       <p>
-        <strong>Note:</strong> You'll need to use your browser devtools sensors
+        <strong>Note:</strong> You might need to use your browser devtools sensors
         to simulate location changes.
       </p>
     </Fragment>

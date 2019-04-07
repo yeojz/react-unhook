@@ -263,7 +263,7 @@ Only runs the callback when inputs change and not during mounting.
 ```ts
 interface Props {
   fn: () => void | VoidFn;
-  inputs?: any[];
+  inputs: any[]; // unlike UseEffect, this is required.
   comparator?: EqualityFn;
 }
 ```

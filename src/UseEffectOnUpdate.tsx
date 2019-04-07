@@ -4,7 +4,7 @@ import { EqualityFn, VoidFn } from './utils';
 
 interface Props {
   fn: () => void | VoidFn;
-  inputs?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+  inputs: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
   comparator?: EqualityFn;
 }
 
