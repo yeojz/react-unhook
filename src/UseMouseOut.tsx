@@ -14,7 +14,7 @@ export default class UseMouseOut extends React.Component<Props> {
 
     if (
       target &&
-      (target == evt.target || target === document || target === window)
+      (target === evt.target || target === document || target === window)
     ) {
       this.props.fn();
     }
