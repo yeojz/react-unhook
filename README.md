@@ -22,23 +22,21 @@
   - [Effects With Cleanup](#effects-with-cleanup)
   - [Optimizing Performance](#optimizing-performance)
 - [API Reference](#api-reference)
-  - [Core Components](#core-components)
+  - [Core](#core)
     - [UseEffect](#useeffect)
     - [UseCallback](#usecallback)
-  - [Additional Components](#additional-components)
-    - [Lifecycle](#lifecycle)
-      - [UseEffectOnUpdate](#useeffectonupdate)
-      - [UseEffectOnce](#useeffectonce)
-      - [UseMount](#usemount)
-      - [UseUnmount](#useunmount)
-    - [Timing](#timing)
-      - [UseInterval](#useinterval)
-      - [UseTimeout](#usetimeout)
-    - [Sensors](#sensors)
-      - [UseGeolocation](#usegeolocation)
-    - [UI](#ui)
-      - [UseMouseOut](#usemouseout)
-- [References](#references)
+  - [Lifecycle](#lifecycle)
+    - [UseEffectOnUpdate](#useeffectonupdate)
+    - [UseEffectOnce](#useeffectonce)
+    - [UseMount](#usemount)
+    - [UseUnmount](#useunmount)
+  - [Timing](#timing)
+    - [UseInterval](#useinterval)
+    - [UseTimeout](#usetimeout)
+  - [Sensors](#sensors)
+    - [UseGeolocation](#usegeolocation)
+  - [UI](#ui)
+    - [UseMouseOut](#usemouseout)
 - [License](#license)
 
 <!-- /TOC -->
@@ -234,7 +232,12 @@ Using Unhook:
 **Note:** The comparator function, by default, follows React Hook's `areHookInputsEqual` method,
 which uses `Object.is` to compare the values in the array.
 
-### Core Components
+All components are based of the 2 core components, namely `UseCallback` and `UseEffect`.
+
+Most of the components outside of core are a reference port of [react-use](https://github.com/streamich/react-use),
+but using react-unhook's `<UseEffect />` instead of actual React Hooks.
+
+### Core
 
 #### UseEffect
 
@@ -262,13 +265,9 @@ interface Props {
 }
 ```
 
-### Additional Components
+### Lifecycle
 
-These components are implementations of the 2 core components.
-
-#### Lifecycle
-
-##### UseEffectOnUpdate
+#### UseEffectOnUpdate
 
 Only runs the callback when inputs change and not during mounting.
 
@@ -280,7 +279,7 @@ interface Props {
 }
 ```
 
-##### UseEffectOnce
+#### UseEffectOnce
 
 Alias method using `UseEffect` with `prop.inputs` preset to `[]`
 
@@ -290,7 +289,7 @@ interface Props {
 }
 ```
 
-##### UseMount
+#### UseMount
 
 Calls a function when the component is mounted
 
@@ -300,7 +299,7 @@ interface Props {
 }
 ```
 
-##### UseUnmount
+#### UseUnmount
 
 Calls a function when the component will unmount.
 
@@ -310,9 +309,9 @@ interface Props {
 }
 ```
 
-#### Timing
+### Timing
 
-##### UseInterval
+#### UseInterval
 
 Calls the function at every specified interval (in milliseconds),
 eg: Polling.
@@ -324,7 +323,7 @@ interface Props {
 }
 ```
 
-##### UseTimeout
+#### UseTimeout
 
 Calls the function after the specified wait time (in milliseconds)
 
@@ -335,9 +334,9 @@ interface Props {
 }
 ```
 
-#### Sensors
+### Sensors
 
-##### UseGeolocation
+#### UseGeolocation
 
 Tracks user's geographic location.
 
@@ -352,9 +351,9 @@ interface Props {
 }
 ```
 
-#### UI
+### UI
 
-##### UseMouseOut
+#### UseMouseOut
 
 Fires a callback when mouse leaves target element.
 
@@ -365,11 +364,6 @@ interface Props {
   capture?: boolean;
 }
 ```
-
-## References
-
-Most of the "additional components" are a port of [react-use](https://github.com/streamich/react-use),
-but using react-unhook's `<UseEffect />` component instead of actual React Hooks.
 
 ## License
 
