@@ -8,21 +8,15 @@ interface Props {
   comparator?: EqualityFn;
 }
 
-interface State {
-  mounted: boolean;
-}
-
-export default class UseEffectOnUpdate extends React.Component<Props, State> {
-  state = {
-    mounted: false
-  };
+export default class UseEffectOnUpdate extends React.Component<Props> {
+  mounted: boolean = false;
 
   callback = (): void | VoidFn => {
-    if (this.state.mounted) {
+    if (this.mounted) {
       return this.props.fn();
     }
 
-    this.setState({ mounted: true });
+    this.mounted = true;
   };
 
   render(): JSX.Element {
