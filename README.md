@@ -49,7 +49,7 @@
 packaging it into a standalone "Null Components" (components that render `null`) **without** the
 use of React hooks under-the-hood.
 
-(Note: This is not about avoiding hooks. Just an alternative to it).
+(Note: This is not about avoiding hooks. Just an alternative to some of it).
 
 ## Motivation
 
@@ -57,18 +57,19 @@ use of React hooks under-the-hood.
 changes the way we have been approaching React components, formalising new ways of encapsulating logic
 in our components.
 
-Taking inspiration of that, we can be similarly achieved using Null Components, making use of lifecycle
-to achive the desired code segmentation effects (aside from low-level / library optimization of hooks).
-Components are ultimately functions when transpiled from JSX.
+Taking inspiration of that, we can make use of the existing lifecycle methods to achive some
+behaviours of React hooks via Null Components. This allows us to achieve similar code style
+and logic encapsulation of React hooks, aside from low-level / library optimization of hooks.
 
 ## Limitations
 
-With that said, there are some limitations to this "Unhook" pattern. **Stateful hooks (eg: "useReducer")
-cannot easily be emulated** as we are not able to expose functions of the component without resorting
+With that said, there are some limitations to this Null Component pattern. **Stateful hooks (eg: "useReducer")
+cannot be emulated easily** as we are not able to expose functions of the component without resorting
 to anti-patterns (eg: using `React.createRef` to access component methods).
 
-However, this "Unhook" pattern works well for "listeners", "workers" or anything that require
-triggering of a function after a change in value. eg: geolocation, timeouts, data fetching etc.
+However, this Null Component pattern works well for "listeners", "workers" or
+"value-change triggers" (triggering of a function after a change in value).
+eg: geolocation, timeouts, data fetching etc.
 
 ## Use Case
 
