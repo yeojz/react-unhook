@@ -44,25 +44,27 @@
 ## About
 
 `react-unhook` attempts to emulate some of the functionality and segmentation aspect of react hooks,
-packaging it into a standalone "Null Components" **without** the use of react-hook under-the-hood.
+packaging it into a standalone "Null Components" (components that render `null`) **without** the
+use of React hooks under-the-hood.
 
-(p.s "Null Components" = components that render `null`)
+(Note: This is not about avoiding hooks. Just an alternative to it).
 
 ## Motivation
 
 [React Hooks](https://reactjs.org/docs/hooks-intro.html) are a new addition to React 16.8 and it
-changes the way we have been approaching React components. It addresses many of the reasons why we might
-need to choose a `class` component over `functional` component.
+changes the way we have been approaching React components, formalising new ways of encapsulating logic
+in our components.
 
-However, if we see components as another form of functions, and encapsulate lifecycle / side-effect code
-into them as "Null Components", then effectively, it's another way of compartmentalising our code.
+Taking inspiration of that, we can be similarly achieved using Null Components, making use of lifecycle
+to achive the desired code segmentation effects (aside from low-level / library optimization of hooks).
+Components are ultimately functions when transpiled from JSX.
 
 **Use Case**:
 
 ```jsx
 // Imagine that you have a signup form that on certain value change,
 // we want to fetch things or asynchronously set values
-// This can possible be the result using "Null Components"
+// Using "Null Components" we can declaratively define those effects.
 
 function SignupForm(props) {
   return (
@@ -72,9 +74,8 @@ function SignupForm(props) {
       <Input name="input-three" />
 
       <FetchWhenInputOneIsFilled name="action-one" />
-      <FetchWhenActionOneIsComplete name="action-two" />
-      <FetchWhenInputTwoThreeIsFilled name="action-three" />
-      <SetStateWhenAllActionsComplete name="action-four" />
+      <ValidateWhenTwoIsDirty name="action-two" />
+      <UpdateInputThreeWhenTwoIsValid name="action-three" />
     </Fragment>
   );
 }
@@ -232,10 +233,10 @@ Using Unhook:
 **Note:** The comparator function, by default, follows React Hook's `areHookInputsEqual` method,
 which uses `Object.is` to compare the values in the array.
 
-All components are based of the 2 core components, namely `UseCallback` and `UseEffect`.
+All unhook components make use of `UseCallback` and `UseEffect` at their core.
 
-Most of the components outside of core are a reference port of [react-use](https://github.com/streamich/react-use),
-but using react-unhook's `<UseEffect />` instead of actual React Hooks.
+Many of the components are inspired by hooks from [react-use](https://github.com/streamich/react-use),
+but re-implmented using react-unhook's `<UseEffect />` instead of actual React Hooks.
 
 ### Core
 
