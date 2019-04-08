@@ -15,6 +15,8 @@
 
 - [About](#about)
 - [Motivation](#motivation)
+- [Limitations](#limitations)
+- [Use Case](#use-case)
 - [Usage](#usage)
 - [Example](#example)
   - [Demo / Storybook](#demo--storybook)
@@ -59,7 +61,16 @@ Taking inspiration of that, we can be similarly achieved using Null Components, 
 to achive the desired code segmentation effects (aside from low-level / library optimization of hooks).
 Components are ultimately functions when transpiled from JSX.
 
-**Use Case**:
+## Limitations
+
+With that said, there are some limitations to this "Unhook" pattern. **Stateful hooks (eg: "useReducer")
+cannot easily be emulated** as we are not able to expose functions of the component without resorting
+to anti-patterns (eg: using `React.createRef` to access component methods).
+
+However, this "Unhook" pattern works well for "listeners", "workers" or anything that require
+triggering of a function after a change in value. eg: geolocation, timeouts, data fetching etc.
+
+## Use Case
 
 ```jsx
 // Imagine that you have a signup form that on certain value change,
