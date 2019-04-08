@@ -63,13 +63,15 @@ and logic encapsulation of React hooks, aside from low-level / library optimizat
 
 ## Limitations
 
-With that said, there are some limitations to this Null Component pattern. **Stateful hooks (eg: "useReducer")
-cannot be emulated easily** as we are not able to expose functions of the component without resorting
-to anti-patterns (eg: using `React.createRef` to access component methods).
+With that said, there are some limitations to this Null Component pattern.
+**Stateful hooks (eg: "useReducer") cannot be emulated easily** as we are not able to expose
+functions of the component without resorting to anti-patterns (eg: using `React.createRef` to
+access component methods).
 
-However, this Null Component pattern works well for "listeners", "workers" or
-"value-change triggers" (triggering of a function after a change in value).
-eg: geolocation, timeouts, data fetching etc.
+However, this Null Component pattern **works well for "listeners", "workers" or
+"value-change triggers"** (triggering of a function after a change in value).
+For example, listening to geolocation changes, interval calls, data fetching on
+parameter changes etc.
 
 ## Use Case
 
